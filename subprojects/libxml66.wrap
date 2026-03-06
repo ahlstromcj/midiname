@@ -1,0 +1,25 @@
+#----------------------------------------------------------------------------
+#
+# Xml66 Library Wrapper
+# Chris Ahlstrom
+# 2026-02-21 to 2026-02-21
+#
+#   Xml66 wrapper for GitHub repository.
+#
+#----------------------------------------------------------------------------
+
+[wrap-git]
+
+url = https://github.com/ahlstromcj/xml66.git
+revision = wip
+depth = 1
+
+[provide]
+
+#----------------------------------------------------------------------------
+# These dependencies are declared in cfg66/meson.build.
+#----------------------------------------------------------------------------
+
+libxml66_library = libxml66_dep
+
+# vim: ft=dosini

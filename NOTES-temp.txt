@@ -1,0 +1,20 @@
+
+A canonical path (or canonical form) is a unique, absolute representation of a
+file or directory, resolving symbolic links and removing redundant elements
+like . or ... Unlike absolute paths, which may vary, the canonical path is
+unique for every file, providing a consistent, non-system-dependent reference. 
+
+Key Aspects of Canonical Paths:
+
+    Definition: Converts a path to an absolute, unique form.
+
+    Resolution: Resolves . (current directory) and .. (parent directory)
+    references.
+
+    Symbolic Links: On UNIX-like systems, it resolves symbolic links to their
+    actual target path.
+
+    Case Sensitivity: On Windows, it standardizes drive letters and case.
+
+    Existence: A canonical path exists for both existing and non-existent
+    files, though it might change upon file creation or deletion

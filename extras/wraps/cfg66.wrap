@@ -1,0 +1,27 @@
+#----------------------------------------------------------------------------
+#
+# Xml66 Library Wrapper
+# Chris Ahlstrom
+# 2026-02-20 to 2026-02-20
+#
+#   Xml66 wrapper for GitHub repository
+#
+#   When finished, replace 'wip' with 'head':
+#
+#----------------------------------------------------------------------------
+
+[wrap-git]
+
+url = https://github.com/ahlstromcj/xml66.git
+revision = head
+depth = 1
+
+[provide]
+
+#----------------------------------------------------------------------------
+# This dependency is declared in xml66/meson.build.
+#----------------------------------------------------------------------------
+
+libxml66_library = libxml66_dep
+
+# vim: ft=dosini

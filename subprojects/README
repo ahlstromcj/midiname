@@ -1,0 +1,10 @@
+Midiname Subprojects Directory
+Chris Ahlstrom
+2026-02-21 to 2026-02-21
+
+The "subprojects" directory supports usage of the potext
+library, the cfg66 library, the xml66 library, plus the lib66
+headers-only library, as subprojects that get downloaded
+from GitHub.
+
+# vim: sw=4 ts=4 wm=8 et ft=sh

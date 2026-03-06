@@ -1,0 +1,56 @@
+#*****************************************************************************
+# meson.options (midiname)
+#-----------------------------------------------------------------------------
+##
+# \file        meson.options
+# \library     midiname
+# \author      Chris Ahlstrom
+# \date        2026-02-21
+# \updates     2026-02-21
+# \license     $XPC_SUITE_GPL_LICENSE$
+#
+#  This file is part of the "midiname" library.
+#
+#  As of version 1.1, Meson uses "meson.options" in preference to
+#  "meson_options.txt".
+#
+#  Options for midiname.
+#
+#-----------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------
+#  We do not need to append version numbers to the documents directory.
+#-----------------------------------------------------------------------------
+
+option('docdir',
+   type : 'string',
+   value : 'share/doc/midiname',
+   description : 'Directory where Midiname documentation is installed.',
+   yield : true
+)
+
+#-----------------------------------------------------------------------------
+# This option is checked only if midiname is not used as a subproject.
+#-----------------------------------------------------------------------------
+
+option('enable-tests',
+   type : 'boolean',
+   value : true,
+   description : 'Build the test program(s)'
+)
+
+#-----------------------------------------------------------------------------
+# Potential usage of our translation library.
+#-----------------------------------------------------------------------------
+
+option('potext',
+   type : 'boolean',
+   value : false,
+   description : 'Build the linkage test program with potext_support.'
+)
+
+#****************************************************************************
+# meson.options (midiname)
+#----------------------------------------------------------------------------
+# vim: ts=3 sw=3 ft=meson
+#----------------------------------------------------------------------------
