@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MIDIDeviceTypes PUBLIC "-//MIDI Manufacturers Association//DTD MIDIDeviceTypes 0.3//EN" "http://www.sonosphere.com/dtds/MIDIDeviceTypes.dtd">
+
+<MIDIDeviceTypes>
+	<MIDIDeviceType Manufacturer="Dave Smith Instruments" Model="Tetra"
+        SupportsGeneralMIDI="false" SupportsMMC="false" IsSampler="false"
+        IsDrumMachine="false" IsMixer="false" IsEffectUnit="false" >
+		<InquiryResponse Manufacturer="01" Family="26 01" Member="00 00" />
+		<DeviceID Min="1" Max="16" Default="1" Base="1" />
+		<Receives MaxChannels="16" MTC="false" Clock="true" Notes="true"
+            ProgramChanges="true" BankSelectMSB="false" BankSelectLSB="true"
+            PanDisruptsStereo="false" />
+		<Transmits MaxChannels="1" MTC="false" Clock="true" Notes="true"
+            ProgramChanges="true" BankSelectMSB="false" BankSelectLSB="true" />
+	</MIDIDeviceType>
+	
+	<MIDIDeviceType Manufacturer="Dave Smith Instruments"
+        Model="Prophet 12 Keyboard" SupportsGeneralMIDI="false"
+        SupportsMMC="false" IsSampler="false" IsDrumMachine="false"
+        IsMixer="false" IsEffectUnit="false" >
+		<InquiryResponse Manufacturer="01" Family="2A 01" Member="00 00" />
+		<DeviceID Min="1" Max="16" Default="1" Base="1" />
+		<Receives MaxChannels="16" MTC="false" Clock="true" Notes="true"
+            ProgramChanges="true" BankSelectMSB="false" BankSelectLSB="true"
+            PanDisruptsStereo="false" />
+		<Transmits MaxChannels="1" MTC="false" Clock="true" Notes="true"
+            ProgramChanges="true" BankSelectMSB="false" BankSelectLSB="true" />
+	</MIDIDeviceType>
+	
+	<MIDIDeviceType Manufacturer="Dave Smith Instruments"
+        Model="Poly Evolver Keyboard" SupportsGeneralMIDI="false"
+        SupportsMMC="false" IsSampler="false" IsDrumMachine="false"
+        IsMixer="false" IsEffectUnit="false" >
+		<InquiryResponse Manufacturer="01" Family="21 00" Member="00 00" />
+		<DeviceID Min="1" Max="16" Default="1" Base="1" />
+		<Receives MaxChannels="16" MTC="false" Clock="true" Notes="true"
+            ProgramChanges="true" BankSelectMSB="false" BankSelectLSB="true"
+            PanDisruptsStereo="false" />
+		<Transmits MaxChannels="1" MTC="false" Clock="true" Notes="true"
+            ProgramChanges="true" BankSelectMSB="false" BankSelectLSB="true" />
+	</MIDIDeviceType>
+	
+</MIDIDeviceTypes>

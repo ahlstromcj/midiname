@@ -1,9 +1,24 @@
-Tests/Data Directory for the xml66 library
+Tests/Data Directory for the Midiname library
 Chris Ahlstrom
-2026-02-20 to 2026-02-20
+2026-02-20 to 2026-03-09
 
-This file lists the data associated with each test application.
+This file describes the data associated with the test application.
 
-To do:
+    Files from the /usr/share/ardour9/patchfile directory:
+            
+        Roland_MT_32.midnam
+        Roland_SC_88_Pro.midnam
+        Yamaha_PSR_S900.midnam
+
+    File from https://github.com/SquishyCat/MIDI-Configs:
+
+        DaveSmithInstruments.middev
+
+    From https://www.danphillips.com/music_tools_files/TC_Electronic.sit:
+
+        TC Electronic.middev
+
+    This StuffIt file was unpacked on Linux using the "unar" (unarchive)
+    program. Only the middev file is needed for testing.
 
 # vim: sw=4 ts=4 wm=8 et ft=sh

@@ -43,7 +43,7 @@
  * \file          midnam_entities.hpp
  *
  *    Provides the implementations for safe replacements for the various
- *    XML functions useful in handling MIDINAM files..
+ *    XML functions useful in handling MIDINAM files.
  *
  * \library       midiname library
  * \author        Chris Ahlstrom
@@ -554,7 +554,7 @@ private:
 
 public:
 
-    Value() = default;
+    Value () = default;
     Value (std::uint16_t num, const std::string & name) :
         m_number    (num),
         m_name      (name)
@@ -748,7 +748,7 @@ private:
 
 public:
 
-    ControlNameList() = default;
+    ControlNameList () = default;
 
     ControlNameList (const std::string & name) : m_name (name)
     {

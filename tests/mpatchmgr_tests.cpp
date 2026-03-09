@@ -17,17 +17,62 @@
  */
 
 /**
- * \file          midiname_tests.cpp
+ * \file          mpatchmgr_tests.cpp
  *
  *      A test-file for the rudimentary XML/Midiname parser.
  *
  * \library       midiname
  * \author        Chris Ahlstrom
- * \date          2026-02-21
- * \updates       2026-03-06
+ * \date          2026-03-07
+ * \updates       2026-03-09
  * \license       See above.
  *
- *  To do: add a help-line for each option.
+ *  Tests: (MPM is short for midi::nam::MidiPatchManager)
+ *
+ *      -   util::searchpath (Searchpath)
+ *
+ *          -   add_search_path(). Adds a util::searchpath to the MPM.
+ *          -   remove_search_path(). Removes a search path from the MPM.
+ *
+ *      -   *.midnam handling
+ *
+ *          -   add_custom_midnam(). Creates a MIDINameDocument, reads a
+ *              *.midnam file, and adds it to the patchmanager.
+ *          -   load_midnams(). Call add_midnam_files_from_directory() for
+ *              each directory in the search paths.
+ *          -   add_midnam_files_from_directory(). Finds all *.midnam files in
+ *              a directory and calls load_midi_name_document().
+ *          -   load_midi_name_document(). Creates a new MIDINameDocument from
+ *              a file-path, and calls add_midi_name_document().
+ *          -   add_midi_name_document(). Complex. See the function banner.
+ *          -   remove_midnam_files_from_directory(). Finds the matching *.midnam
+ *              files and calls remove_midi_name_document() for each.
+ *          -   remove_midi_name_document(). Complex. See the function banner.
+ *          -   remove_custom_midnam() and update_custom_midnam().
+ *
+ *      - By-model selection:
+ *
+ *          -   is_custom_model(). Selects a document by model name and checks if
+ *              it has "custom:" in its file-path.
+ *          -   document_by_model(). Selects a document, by model name, from
+ *              the collection of documents.
+ *          -   custom_device_mode_names_by_model(). Collects the device mode
+ *              names by model and returns a CustomDeviceModeNames object.
+ *          -   find_channel_name_set(). Gets a master device by model name,
+ *              and gets the set with the matching device mode and channel.
+ *
+ *      -   Patches:
+ *
+ *          -   find_patch(). Calls find_channel_name_set() and then looks up
+ *              the patch key, returning a pointer to the patch.
+ *          -   previous_patch(). Similar to find_patch(), but gets the patch
+ *              previous to the given patch key.
+ *          -   next_patch(). Similar to find_patch(), but gets the patch
+ *              after to the given patch key.
+ *
+ * CURRENTLY IN PROGRESS
+ * CURRENTLY IN PROGRESS
+ * CURRENTLY IN PROGRESS
  */
 
 #include <cstdlib>                      /* EXIT_SUCCESS, EXIT_FAILURE       */
@@ -61,21 +106,35 @@ error (int counter, const std::string & section = "")
     return false;
 }
 
-class midnamtest
+#if USE_THIS_CODE
+
+class mpmgrtest
 {
 
 private:
 
-    util::searchpath m_search_paths;
+    // util::searchpath m_search_paths;
+
+    midi::nam::MidiPatchManager m_patch_manager;
 
 public:
 
-    midnamtest () = default;
-    midnamtest (const midnamtest &) = delete;
-    midnamtest & operator = (const midnamtest &) = delete;
-    midnamtest (midnamtest &&) = delete;
-    midnamtest & operator = (midnamtest &&) = delete;
-    ~midnamtest () = default;
+    mpmgrtest () = default;
+    mpmgrtest (const mpmgrtest &) = delete;
+    mpmgrtest & operator = (const mpmgrtest &) = delete;
+    mpmgrtest (mpmgrtest &&) = delete;
+    mpmgrtest & operator = (mpmgrtest &&) = delete;
+    ~mpmgrtest () = default;
+
+    midi::nam::MidiPatchManager & patch_manager ()
+    {
+        return m_patch_manager;
+    }
+
+    const midi::nam::MidiPatchManager & patch_manager () const
+    {
+        return m_patch_manager;
+    }
 
 	bool setup ()
     {
@@ -114,10 +173,13 @@ public:     // used by main()
 
     bool set_test_search_paths
     (
+        midi::nam::MidiPatchManager & mpm,
         const std::string & install_directory = ""
     );
 
 };
+
+#endif  // REMOVE_THIS_CODE
 
 /**
  *  Sets up the list of directories of test directories.
@@ -147,21 +209,26 @@ public:     // used by main()
  */
 
 bool
-midnamtest::set_test_search_paths (const std::string & installdirs)
+mpmgrtest::set_test_search_paths
+(
+    midi::nam::MidiPatchManager & mpm,
+    const std::string & installdirs
+)
 {
-    m_search_paths.paths().clear();
+    util::searchpath spaths;            /* m_search_paths.paths().clear()   */
+    mpm.clear_search_path(spaths);
     if (installdirs.empty())
     {
         std::string mtp { util::get_env("MIDIPP_TEST_PATH") };
         if (mtp.empty())
-            m_search_paths = util::searchpath("tests/data/");
+            spaths = util::searchpath("tests/data/");
         else
-            m_search_paths = util::searchpath(mtp);
+            spaths = util::searchpath(mtp);
     }
     else if (installdirs == "INSTALLED")
     {
         /*
-         * This works only if Ardour is installed.
+         * This works only if Ardour 9 is installed.
          */
 
         std::string install_directory
@@ -178,12 +245,16 @@ midnamtest::set_test_search_paths (const std::string & installdirs)
         pathtoks.push_back("share");
         pathtoks.push_back("ardour9");              // XXX lwrcase_dirname
         pathtoks.push_back("patchfiles");
-        m_search_paths = util::searchpath(pathtoks); // file_build_path(path_tok);
+        spaths = util::searchpath(pathtoks); // file_build_path(path_tok);
     }
     else
-        m_search_paths = util::searchpath(installdirs);
+        spaths = util::searchpath(installdirs);
 
-    return m_search_paths.paths().size() > 0;
+    bool result { spaths.paths().size() > 0 };
+    if (result)
+        mpm.add_search_path(spaths);
+
+    return result;
 }
 
 /**
@@ -191,7 +262,7 @@ midnamtest::set_test_search_paths (const std::string & installdirs)
  */
 
 bool
-midnamtest::protools_patchfile_test (const std::string & testpath)
+mpmgrtest::protools_patchfile_test (const std::string & testpath)
 {
     std::string testfilepath
     {
@@ -312,7 +383,7 @@ midnamtest::protools_patchfile_test (const std::string & testpath)
  */
 
 bool
-midnamtest::yamaha_PSRS900_patchfile_test (const std::string & testpath)
+mpmgrtest::yamaha_PSRS900_patchfile_test (const std::string & testpath)
 {
     std::string testfilepath
     {
@@ -455,7 +526,7 @@ midnamtest::yamaha_PSRS900_patchfile_test (const std::string & testpath)
  */
 
 bool
-midnamtest::load_all_midnams_test
+mpmgrtest::load_all_midnams_test
 (
     const util::searchpath & testsearchpaths,
     bool verbose
@@ -565,7 +636,7 @@ const std::string help_intro
  * Main
  *--------------------------------------------------------------------------*/
 
-}           // namespace anonymous
+}   // namespace anonymous
 
 /*
  * main() routine
@@ -592,7 +663,7 @@ main (int argc, char * argv [])
 
     bool success { clip.parse(argc, argv) };
     bool nohelp { true };
-    midnamtest mntest;
+    mpmgrtest mpmtest;
     std::cout << "Test of " << midiname_version() << ":" << std::endl;
 
     if (success)
@@ -617,11 +688,11 @@ std::cout
             if (! testpath.empty())                         /* --test-path  */
             {
                 util::searchpath sp { testpath };
-                mntest.set_search_paths(sp);
+                mpmtest.set_search_paths(sp);
                 success = true;
             }
             else
-                success = mntest.set_test_search_paths();   /* defaults     */
+                success = mpmtest.set_test_search_paths();  /* defaults     */
         }
 
         if (success)
@@ -634,12 +705,12 @@ std::cout
 
             std::string single_test_path
             {
-                mntest.get_search_paths().paths()[0]
+                mpmtest.get_search_paths().paths()[0]
             };
-            success = mntest.protools_patchfile_test(single_test_path);
+            success = mpmtest.protools_patchfile_test(single_test_path);
             if (success)
             {
-                success = mntest.yamaha_PSRS900_patchfile_test
+                success = mpmtest.yamaha_PSRS900_patchfile_test
                 (
                     single_test_path
                 );
@@ -650,22 +721,22 @@ std::cout
                 if (! verbose)
                     verbose = testpath.empty();
 
-                success = mntest.load_all_midnams_test
+                success = mpmtest.load_all_midnams_test
                 (
-                    mntest.get_search_paths(), verbose
+                    mpmtest.get_search_paths(), verbose
                 );
             }
             if (success)
-                std::cout << "midiname_tests has succeeded." << std::endl;
+                std::cout << "mpatchmgr_tests has succeeded." << std::endl;
             else
-                std::cerr << "midiname_tests has failed." << std::endl;
+                std::cerr << "mpatchmgr_tests has failed." << std::endl;
         }
     }
     return success ? EXIT_SUCCESS : EXIT_FAILURE ;
 }
 
 /*
- * midiname_tests.cpp
+ * mpatchmgr_tests.cpp
  *
  * vim: sw=4 ts=4 wm=4 et ft=cpp
  */

@@ -37,12 +37,12 @@
  */
 
 /**
- * \file          midipatchmanager.hpp
+ * \file          midipatchmanager.cpp
  *
  *    Provides the implementations for safe replacements for the various
  *    XML functions useful in handling MIDINAM files.
  *
- * \library       xml66 library
+ * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-02-20
  * \updates       2026-03-02
@@ -61,10 +61,10 @@ namespace nam
 {
 
 /**
- *  Provides the singleton MidiPatchManager.
+ *  Provides the singleton MidiPatchManager. We don't care about that now.
+ *
+ *      MidiPatchManager * MidiPatchManager::m_manager { nullptr };
  */
-
-MidiPatchManager * MidiPatchManager::m_manager { nullptr };
 
 /**
  *  Constructor.
@@ -83,18 +83,17 @@ MidiPatchManager::MidiPatchManager ()
 
 MidiPatchManager::~MidiPatchManager ()
 {
+#if defined USE_SINGLETON_MIDIPATCHMANAGER
     m_manager = nullptr;            // why bother? shouldn't we delete it?
-
-//  stop_thread = true;
-//  m_midnam_load_thread->join ();
+#endif
 }
 
 /**
- *  Adds the files in a SearchPath to the patch-manager's SearchPath
+ *  Adds the files in a util::searchpath to the patch-manager's util::searchpath
  */
 
 void
-MidiPatchManager::add_search_path (const SearchPath & search_path)
+MidiPatchManager::add_search_path (const util::searchpath & search_path)
 {
     for (const auto & f : search_path.paths())
     {
@@ -111,11 +110,17 @@ MidiPatchManager::add_search_path (const SearchPath & search_path)
     }
 }
 
+/**
+ *  Creates a MIDINameDocument, reads a *.midnam file into an XMLTree,
+ *  and sets the MPM's state to the tree. It sets the file-path of
+ *  this document to "custom:ID".
+ */
+
 bool
 MidiPatchManager::add_custom_midnam
 (
     const std::string & id,
-    char const * midnam
+    const std::string & midnam
 )
 {
     MIDINameDocumentPtr document
@@ -123,7 +128,7 @@ MidiPatchManager::add_custom_midnam
         MIDINameDocumentPtr(new MIDINameDocument())
     };
     xml66::XMLTree mxml;
-    if (mxml.read_buffer(midnam, true))
+    if (mxml.read_buffer(CSTR(midnam), true))
     {
         if (document->set_state(mxml, *mxml.root()) == 0)
         {
@@ -145,7 +150,7 @@ bool
 MidiPatchManager::update_custom_midnam
 (
     const std::string & id,
-    char const * midnam
+    const std::string & midnam
 )
 {
     remove_midi_name_document("custom:" + id);  /* no more signalling here  */
@@ -185,7 +190,6 @@ MidiPatchManager::add_midnam_files_from_directory
         )
     };
     std::cout << msg << std::endl;
-
     for (auto i : collected)
     {
         // if (stop_thread)
@@ -196,7 +200,7 @@ MidiPatchManager::add_midnam_files_from_directory
 }
 
 void
-MidiPatchManager::remove_search_path (const SearchPath & search_path)
+MidiPatchManager::remove_search_path (const util::searchpath & search_path)
 {
     for (auto i : search_path.paths())
     {
@@ -287,7 +291,7 @@ MidiPatchManager::find_channel_name_set
 /* MidiPatchManager:: */
 
 PatchPtr
-MidiPatchManager:: find_patch
+MidiPatchManager::find_patch
 (
     const std::string & model,
     const std::string & custom_device_mode,
@@ -366,10 +370,20 @@ MidiPatchManager::custom_device_mode_names_by_model
     return CustomDeviceModeNames();
 }
 
+/**
+ *  For each device in the device-names list, if not already in the
+ *  documents:
+ *
+ *      -   
+ *
+ */
+
 bool
 MidiPatchManager::add_midi_name_document (MIDINameDocumentPtr document)
 {
     bool added { false };
+
+#if 0
     for
     (
         DeviceNamesListEx::const_iterator device
@@ -379,6 +393,9 @@ MidiPatchManager::add_midi_name_document (MIDINameDocumentPtr document)
         device != document->master_device_names_by_model().end();
          ++device
     )
+#endif
+
+    for (const auto & device : document->master_device_names_by_model())
     {
         if (m_documents.find(device->first) != m_documents.end())
         {
@@ -433,6 +450,10 @@ MidiPatchManager::add_midi_name_document (MIDINameDocumentPtr document)
 }
 
 /**
+ *  For each MIDINameDocument in the collection that matches the file-path,
+ *  document is erased from the stored list of documents. Then for
+ *  each device name ...
+ *
  *  The emit_signal boolean parameter has been removed.
  */
 
@@ -499,13 +520,14 @@ void
 MidiPatchManager::load_midnams ()
 {
     for (auto p : m_search_path.paths())
-        add_midnam_files_from_directory (p);
+        add_midnam_files_from_directory(p);
 }
+
+#if 0
 
 void
 MidiPatchManager::load_midnams_in_thread ()
 {
-#if 0
     if (! getenv("ARDOUR_NO_PATCHFILES"))
     {
         m_midnam_load_thread = PBD::Thread::create
@@ -514,10 +536,7 @@ MidiPatchManager::load_midnams_in_thread ()
             "MIDNAMLoader"
         );
     }
-#endif
 }
-
-#if 0
 
 void
 MidiPatchManager::maybe_use
@@ -546,7 +565,7 @@ MidiPatchManager::maybe_use
 }           // namespace midi
 
 /*
- * midipatchmanager.hpp
+ * midipatchmanager.cpp
  *
  * vim: sw=4 ts=4 wm=4 et ft=cpp
  */

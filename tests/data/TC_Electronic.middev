@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MIDIDeviceTypes PUBLIC "-//MIDI Manufacturers Association//DTD MIDIDeviceTypes 0.3//EN" "http://www.sonosphere.com/dtds/MIDIDeviceTypes.dtd">
+
+<MIDIDeviceTypes>
+   <Author> Dan Phillips 2004</Author>
+   <MIDIDeviceType Manufacturer="TC Electronic" Model="Fireworx"
+        SupportsGeneralMIDI="false" SupportsMMC="false" IsSampler="false"
+        IsDrumMachine="false" IsMixer="false" IsEffectUnit="true">
+      <DeviceID Min="1" Max="16" Default="1" Base="1" />
+      <Receives MaxChannels="1" MTC="false" Clock="true" Notes="true"
+        ProgramChanges="true" BankSelectMSB="true" BankSelectLSB="false"
+        PanDisruptsStereo="false" />
+      <Transmits MaxChannels="1" MTC="false" Clock="false" Notes="false"
+        ProgramChanges="true" BankSelectMSB="true" BankSelectLSB="false" />
+   </MIDIDeviceType>
+</MIDIDeviceTypes>

@@ -45,7 +45,7 @@
  *    Provides the implementations for safe replacements for the various
  *    XML functions useful in handling MIDINAM files..
  *
- * \library       xml66 library
+ * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-02-20
  * \updates       2026-03-02
@@ -86,7 +86,17 @@
  *  operator + (std::string)
  *  operator -= (SearchPath)    and remove_directories(vector<string>)
  *  operator -= (std::string)   and remove_directory(string)
+ *
+ * Note:
+ *
+ *      This implementation doesn't support threads.
  */
+
+/**
+ *  The original implementation was a singleton class.
+ */
+
+#undef USE_SINGLETON_MIDIPATCHMANAGER
 
 namespace midi
 {
@@ -94,7 +104,12 @@ namespace midi
 namespace nam
 {
 
-using MIDINameDocumentPtr = std::shared_ptr<MIDINameDocument>;
+/*
+ * Already defined in midnam_entities.hpp
+ *
+ *      using MIDINameDocumentPtr = std::shared_ptr<MIDINameDocument>;
+ */
+
 using MIDINameDocuments = std::map<std::string, MIDINameDocumentPtr>;
 
 class MidiPatchManager
@@ -133,14 +148,16 @@ public:
 
 private:
 
-    SearchPath m_search_path { };
+    util::searchpath m_search_paths { };
     MIDINameDocuments m_documents { };
     DeviceNamesListEx m_master_devices_by_model { };
     DeviceNamesByMaker m_devices_by_manufacturer { };
     DeviceModels m_all_models { };
     bool m_no_patch_changed_messages { false };
 
-private:                    // this is a singleton class
+#if defined USE_SINGLETON_MIDIPATCHMANAGER
+
+private:                    // this was a singleton class
 
     MidiPatchManager ();
     MidiPatchManager (const MidiPatchManager &);
@@ -148,15 +165,23 @@ private:                    // this is a singleton class
     MidiPatchManager (MidiPatchManager &&);
     MidiPatchManager & operator = (MidiPatchManager &&);
 
-    static MidiPatchManager * m_manager;
+#else
 
-private:
+public:
 
-    void load_midnams ();
+    MidiPatchManager ();
+    MidiPatchManager (const MidiPatchManager &) = default;
+    MidiPatchManager & operator = (const MidiPatchManager &) = default;
+    MidiPatchManager (MidiPatchManager &&) = default;
+    MidiPatchManager & operator = (MidiPatchManager &&) = default;
+
+#endif
 
 public:
 
     ~MidiPatchManager ();
+
+#if defined USE_SINGLETON_MIDIPATCHMANAGER
 
     static MidiPatchManager & instance ()
     {
@@ -167,13 +192,33 @@ public:
         return * m_manager;
     }
 
-    bool add_custom_midnam (const std::string & id, char const *);
-    bool update_custom_midnam (const std::string & id, char const *);
+#endif
+
+    util::searchpath & search_paths ()
+    {
+        return m_search_paths;
+    }
+
+    bool add_custom_midnam
+    (
+        const std::string & id,
+        const std::string & midnam
+    );
+    bool update_custom_midnam
+    (
+        const std::string & id,
+        const std::string & midnam
+    );
     bool remove_custom_midnam (const std::string & id);
     bool is_custom_model (const std::string & model) const;
 
-    void add_search_path (const SearchPath & search_path);
-    void remove_search_path (const SearchPath & search_path);
+    void add_search_path (const util::searchpath & search_path);
+    void remove_search_path (const util::searchpath & search_path);
+
+    void clear_search_path ()
+    {
+        search_paths().paths().clear();
+    }
 
     MIDINameDocumentPtr document_by_model
     (
@@ -233,9 +278,9 @@ public:
         return m_devices_by_manufacturer;
     }
 
-    void load_midnams_in_thread ();
 
 #if 0
+    void load_midnams_in_thread ();
     void maybe_use (PBD::ScopedConnectionList & clist,
                     PBD::EventLoop::InvalidationRecord* ir,
                     const std::function<void()> & slot,
@@ -254,6 +299,10 @@ private:
     bool remove_midi_name_document (const std::string & file_path);
     void add_midnam_files_from_directory (const std::string & directory_path);
     void remove_midnam_files_from_directory (const std::string & directory_path);
+
+private:
+
+    void load_midnams ();
 
 };          // class MidiPatchManager
 
