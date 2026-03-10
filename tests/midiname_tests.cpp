@@ -24,7 +24,7 @@
  * \library       midiname
  * \author        Chris Ahlstrom
  * \date          2026-02-21
- * \updates       2026-03-06
+ * \updates       2026-03-09
  * \license       See above.
  *
  *  To do: add a help-line for each option.
@@ -76,16 +76,6 @@ public:
     midnamtest (midnamtest &&) = delete;
     midnamtest & operator = (midnamtest &&) = delete;
     ~midnamtest () = default;
-
-	bool setup ()
-    {
-        return true;
-    }
-
-	bool teardown ()
-    {
-        return true;
-    }
 
 	bool protools_patchfile_test (const std::string & testpath);
 	bool yamaha_PSRS900_patchfile_test (const std::string & testpath);

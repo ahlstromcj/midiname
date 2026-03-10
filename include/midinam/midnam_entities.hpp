@@ -48,9 +48,31 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-02-20
- * \updates       2026-03-02
+ * \updates       2026-03-09
  * \version       $Revision$
  *
+ *  Classes:
+ *
+ *      ChannelNameSet
+ *      Control
+ *      ControlNameList
+ *      CustomDeviceMode
+ *      MIDINameDocument
+ *      MasterDeviceNames
+ *      Note
+ *      NoteNameList
+ *      Patch
+ *      PatchBank
+ *      PatchPrimaryKey
+ *      Value
+ *      ValueNameList
+ *
+ *  Missing:
+ *
+ *      ControlChange
+ *      MIDICommands
+ *      PatchMIDICommands
+ *      PatchNameList
  */
 
 #include <algorithm>                    /* std::min(), std::max()           */

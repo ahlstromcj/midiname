@@ -48,7 +48,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-02-20
- * \updates       2026-03-02
+ * \updates       2026-03-10
  * \version       $Revision$
  *
  */
@@ -199,6 +199,11 @@ public:
         return m_search_paths;
     }
 
+    const util::searchpath & search_paths () const
+    {
+        return m_search_paths;
+    }
+
     bool add_custom_midnam
     (
         const std::string & id,
@@ -212,10 +217,15 @@ public:
     bool remove_custom_midnam (const std::string & id);
     bool is_custom_model (const std::string & model) const;
 
-    void add_search_path (const util::searchpath & search_path);
-    void remove_search_path (const util::searchpath & search_path);
+    void set_search_paths (const util::searchpath & search_paths)
+    {
+        m_search_paths = search_paths;
+    }
 
-    void clear_search_path ()
+    void add_search_paths (const util::searchpath & search_paths);
+    void remove_search_paths (const util::searchpath & search_paths);
+
+    void clear_search_paths ()
     {
         search_paths().paths().clear();
     }

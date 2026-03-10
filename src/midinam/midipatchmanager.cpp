@@ -45,7 +45,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-02-20
- * \updates       2026-03-02
+ * \updates       2026-03-10
  * \version       $Revision$
  *
  */
@@ -93,11 +93,11 @@ MidiPatchManager::~MidiPatchManager ()
  */
 
 void
-MidiPatchManager::add_search_path (const util::searchpath & search_path)
+MidiPatchManager::add_search_paths (const util::searchpath & srch_paths)
 {
-    for (const auto & f : search_path.paths())
+    for (const auto & f : srch_paths.paths())
     {
-        if (m_search_path.contains(f))
+        if (search_paths().contains(f))
             continue;               // already processed files from this path
 
         if (util::file_exists(f))
@@ -106,7 +106,7 @@ MidiPatchManager::add_search_path (const util::searchpath & search_path)
         if (util::file_is_directory(f))
             continue;
 
-        m_search_path.add_directory(f);
+        search_paths().add_directory(f);
     }
 }
 
@@ -200,15 +200,15 @@ MidiPatchManager::add_midnam_files_from_directory
 }
 
 void
-MidiPatchManager::remove_search_path (const util::searchpath & search_path)
+MidiPatchManager::remove_search_paths (const util::searchpath & srch_paths)
 {
-    for (auto i : search_path.paths())
+    for (auto i : srch_paths.paths())
     {
-        if (! m_search_path.contains(i))
+        if (! search_paths().contains(i))
             continue;
 
         remove_midnam_files_from_directory(i);
-        m_search_path.remove_directory (i);
+        search_paths().remove_directory (i);
     }
 }
 
@@ -397,24 +397,24 @@ MidiPatchManager::add_midi_name_document (MIDINameDocumentPtr document)
 
     for (const auto & device : document->master_device_names_by_model())
     {
-        if (m_documents.find(device->first) != m_documents.end())
+        if (m_documents.find(device.first) != m_documents.end())
         {
             std::string msg
             {
                 util::string_format
                 (
                     "Duplicate MIDI device '%1' in '%2' ignored",
-                    V(device->first), V(document->file_path())
+                    V(device.first), V(document->file_path())
                 )
             };
             std::cerr << msg << std::endl;
             continue;
         }
-        m_documents[device->first] = document;
-        m_master_devices_by_model[device->first] = device->second;
-        (void) m_all_models.insert(device->first);
+        m_documents[device.first] = document;
+        m_master_devices_by_model[device.first] = device.second;
+        (void) m_all_models.insert(device.first);
 
-        const std::string & manufacturer { device->second->manufacturer() };
+        const std::string & manufacturer { device.second->manufacturer() };
         bool not_found
         {
             m_devices_by_manufacturer.find(manufacturer) ==
@@ -432,7 +432,7 @@ MidiPatchManager::add_midi_name_document (MIDINameDocumentPtr document)
         }
         m_devices_by_manufacturer[manufacturer].insert
         (
-            std::make_pair(device->first, device->second)
+            std::make_pair(device.first, device.second)
         );
         added = true;
 
@@ -519,7 +519,7 @@ MidiPatchManager::remove_midi_name_document (const std::string & file_path)
 void
 MidiPatchManager::load_midnams ()
 {
-    for (auto p : m_search_path.paths())
+    for (auto p : search_paths().paths())
         add_midnam_files_from_directory(p);
 }
 
