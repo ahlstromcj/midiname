@@ -24,7 +24,7 @@
  * \library       midiname
  * \author        Chris Ahlstrom
  * \date          2026-02-21
- * \updates       2026-03-09
+ * \updates       2026-03-14
  * \license       See above.
  *
  *  To do: add a help-line for each option.
@@ -36,7 +36,7 @@
 
 #include "cli/parser.hpp"               /* cli::parser, etc.                */
 #include "midiname.hpp"                 /* midiname_version() function      */
-#include "midinam/midnam_entities.hpp"  /* midi::nam classes                */
+#include "midi/nam/midnam_entities.hpp" /* midi::nam classes                */
 #include "util/filefunctions.hpp"       /* util::get_env(), etc.            */
 #include "util/ftswalker.hpp"           /* util::fts_get_file_path() etc.   */
 #include "util/searchpath.hpp"          /* class util::searchpath           */

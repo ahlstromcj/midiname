@@ -6,21 +6,21 @@
 # \library     midiname
 # \author      Chris Ahlstrom
 # \date        2026-02-21
-# \updates     2026-02-25
+# \updates     2026-03-15
 # \license     $XPC_SUITE_GPL_LICENSE$
 #
 #  This file is part of the "midiname" library. It was part of the libs66
 #  collection of libraries, but is now separate and stands alone.
 #
-#  The "midiname" library is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by the
-#  Free Software Foundation, either version 3 of the License, or (at your
+#  The "midiname" library is free software: you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or (at your
 #  option) any later version.
 #
-#  The "midiname" library is distributed in the hope that it will be useful, but
-#  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-#  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-#  more details.
+#  The "midiname" library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+#  Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along with
 #  the "midiname" library. If not, see <https://www.gnu.org/licenses/>.
@@ -64,7 +64,7 @@ endif
 midiname_pkg_description = 'Refactors base XML configuration/utility modules.'
 midiname_pkg_version = meson.project_version()
 midiname_api_version = '0.1'
-midiname_info_date = '2026-02-25'
+midiname_info_date = '2026-03-15'
 midiname_info_build_type = get_option('buildtype')
 midiname_info_build_root = meson.project_build_root()
 midiname_info_lib_type = get_option('default_library')
@@ -126,11 +126,15 @@ build_args = []
 #-----------------------------------------------------------------------------
 # Each include file directory is added to the list passed to the compiler.
 # We prefer to use the style '#include "cfg/header.hpp".
+#
+#  'include/midi/nam' ----->  #include "midi/nam/file.cpp"
+#  'include/midi/pack' -----> #include "midi/pack/file.cpp"
+#  libmidiname_include_top
+#
 #-----------------------------------------------------------------------------
 
-libmidiname_includes = include_directories('.',    # libmidiname_include_top
-   'include',
-   'include/midinam'
+libmidiname_includes = include_directories('.',
+   'include'
    )
 
 #-----------------------------------------------------------------------------

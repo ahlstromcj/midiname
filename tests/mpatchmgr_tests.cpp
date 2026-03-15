@@ -24,7 +24,7 @@
  * \library       midiname
  * \author        Chris Ahlstrom
  * \date          2026-03-07
- * \updates       2026-03-10
+ * \updates       2026-03-14
  * \license       See above.
  *
  *  Tests: (MPM is short for midi::nam::MidiPatchManager)
@@ -81,7 +81,7 @@
 
 #include "cli/parser.hpp"               /* cli::parser, etc.                */
 #include "midiname.hpp"                 /* midiname_version() function      */
-#include "midinam/midipatchmanager.hpp" /* midi::nam classes                */
+#include "midi/nam/midipatchmanager.hpp" /* midi::nam classes               */
 #include "util/filefunctions.hpp"       /* util::get_env(), etc.            */
 #include "util/ftswalker.hpp"           /* util::fts_get_file_path() etc.   */
 #include "util/searchpath.hpp"          /* class util::searchpath           */
