@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-15
- * \updates       2026-03-15
+ * \updates       2026-03-16
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to patches.
@@ -66,20 +66,20 @@ public:
     // using pointer = std::shared_ptr<Patch>;
     // using list = std::list<pointer>;
 
-    using list = std::list<patch>;
-    using bank_number = std::uint16_t;
-    using number = std::uint8_t;
+    using namelist = std::list<patch>;
+    using banknumber = std::uint16_t;
+    using prognumber = std::uint8_t;
 
-    static const bank_number c_bank_max { 16383 };     /* 128x128-1, re 0   */
-    static const number c_program_max   {   127 };     /* 128-1, re 0       */
+    static const banknumber c_bank_max { 16383 };     /* 128x128-1, re 0   */
+    static const prognumber c_program_max   {   127 };     /* 128-1, re 0       */
 
     class key
     {
 
     private:
 
-        bank_number m_bank  { 0 };
-        number m_program    { 0 };
+        banknumber m_bank  { 0 };
+        prognumber m_program    { 0 };
 
     public:
 
@@ -97,12 +97,12 @@ public:
         void set_bank (int bank);
         void set_program (int program);
 
-        bank_number bank () const
+        banknumber bank () const
         {
             return m_bank;
         }
 
-        number program () const
+        prognumber program () const
         {
             return m_program;
         }
@@ -111,8 +111,28 @@ public:
 
 private:
 
+    /**
+     *  The "Name" value of the "<Patch>" item.
+     */
+
     std::string m_name { };
+
+    /**
+     *  Need to investigate this one.
+     */
+
     std::string m_note_list_name { };
+
+    /**
+     *  Contains the bank and program numbers used to sort the patches.
+     *
+     *  The patch number is the "Number" value of the "<Patch>" item.
+     *  The "ProgramChange" value seems to be the same as the "Number".
+     *  It is not always present; and in some cases the "Number" is
+     *  3 digits ending in a plus sign (see Roland_SC_88_Pro.midnam).
+     *  What's up with that? Are the two states correlated?
+     */
+
     key m_id { };
 
 public:
@@ -121,8 +141,8 @@ public:
     patch
     (
         const std::string & pname,
-        number programno            = 0,
-        bank_number bankno          = 0
+        prognumber programno            = 0,
+        banknumber bankno          = 0
     );
     patch (const patch & id) = default;
     patch & operator = (const patch & id) = default;
@@ -145,22 +165,22 @@ public:
         return m_note_list_name;
     }
 
-    number program () const
+    prognumber program () const
     {
         return m_id.program();
     }
 
-    void set_program (number n)
+    void set_program (prognumber n)
     {
         m_id.set_program(n);
     }
 
-    bank_number bank () const
+    banknumber bank () const
     {
         return m_id.bank();
     }
 
-    void set_bank (bank_number n)
+    void set_bank (banknumber n)
     {
         m_id.set_bank(n);
     }
@@ -173,7 +193,7 @@ public:
 //  xml66::XMLNode & get_state () const;
 //  int set_state (const xml66::XMLTree &, const xml66::XMLNode &);
 
-};
+};          // class patch
 
 /**
  *  patchbank
@@ -185,8 +205,8 @@ class patchbank
 private:
 
     std::string m_name { };
-    patch::bank_number m_number { UINT16_MAX };             // why???
-    patch::list m_patch_name_list { };                      // PatchNameList
+    patch::banknumber m_number { UINT16_MAX };  /* some don't have a number */
+    patch::namelist m_patch_name_list { };      /* PatchNameList            */
     std::string m_patch_list_name { };
 
 public:
@@ -194,7 +214,7 @@ public:
     patchbank () = default;
     patchbank
     (
-        patch::bank_number n,
+        patch::banknumber n,
         const std::string & aname = ""
     );
     patchbank (const patchbank & id) = default;
@@ -213,12 +233,12 @@ public:
         m_name = aname;
     }
 
-    int number () const
+    int prognumber () const
     {
         return int(m_number);
     }
 
-    const patch::list & patch_name_list () const
+    const patch::namelist & patch_name_list () const
     {
         return m_patch_name_list;
     }
@@ -228,12 +248,12 @@ public:
         return m_patch_list_name;
     }
 
-    int set_patch_name_list (const patch::list &);
+    int set_patch_name_list (const patch::namelist &);
 
 //  xml66::XMLNode & get_state () const;
 //  int set_state (const xml66::XMLTree &, const xml66::XMLNode &);
 
-};
+};          // class patchbank
 
 // using patchbankptr  = std::shared_ptr<patchbank>;
 // using patchbanks    = std::list<patchbankptr>;
@@ -242,7 +262,7 @@ public:
 
 }           // namespace midi
 
-#endif          // MIDINAME_MIDI_PACK_PATCHBANK_HPP
+#endif      // MIDINAME_MIDI_PACK_PATCHBANK_HPP
 
 /*
  * patchbank.hpp

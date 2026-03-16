@@ -25,18 +25,59 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-15
- * \updates       2026-03-15
+ * \updates       2026-03-16
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to patches.
  *  No XML code is involved; no pointers are involved.
  *
  *  Defines patch, patch::key, and patchbank.
+ *
+ *  Layout notes:
+ *
+ *      Waldorf_Blofeld.midnam (from Ardour's patchfiles subdirectory):
+ *
+ *      MIDINAMEDocument
+ *          Author
+ *          MasterDeviceNames
+ *              Manufacturer
+ *              Model
+ *              CustomDeviceMode
+ *              ChannelNameSet
+ *                  AvailableForChannels
+ *                  UsesControlNameList
+ *                  PatchBank
+ *                      MIDICommands
+ *                          ControlChange
+ *                      UsesPatchNameList
+ *              PatchNameList
+ *                  Patch ...
+ *
+ *      Roland_MT_32.midnam (tests/data):
+ *
+ *                  PatchBank
+ *                      PatchNameList
+ *                          Patch ...
+ *
+ *      Yamaha_PSR_S900.midnam (tests/data):
+ *
+ *                  PatchBank
+ *                      PatchNameList
+ *                          Patch ...
+ *                              PatchMIDICommands
+ *                                  ControlChange x 2
+ *                                  ProgramChange
+ *
+ *      Bitheadz_Retro_AS_1.midnam (from Ardour's patchfiles subdirectory):
+ *
+ *                  PatchBank
+ *                      MIDICommands
+ *                          ControlChange x 2
+ *                      PatchNameList
+ *                          Patch ...
  */
 
 #include "midi/pack/patchbank.hpp"      /* midi::pack::patch & patchbank    */
-#include <list>                         /* std::list<>                      */
-#include <map>                          /* std::map<>                       */
 
 namespace midi
 {
@@ -81,7 +122,7 @@ patch::key::set_bank (int bank)
     if (bank < 0 || bank > patch::c_bank_max)
         bank = 0;
 
-    m_bank = bank_number(bank);
+    m_bank = banknumber(bank);
 }
 
 void
@@ -90,7 +131,7 @@ patch::key::set_program (int program)
     if (program < 0 || program > patch::c_program_max)
         program = 0;
 
-    m_program = number(program);
+    m_program = prognumber(program);
 }
 
 /**
@@ -100,8 +141,8 @@ patch::key::set_program (int program)
 patch::patch
 (
     const std::string & pname,
-    number programno,
-    bank_number bankno
+    prognumber programno,
+    banknumber bankno
 ) :
     m_name  (pname),
     m_id    (programno, bankno)
@@ -115,7 +156,7 @@ patch::patch
 
 patchbank::patchbank
 (
-    patch::bank_number n,
+    patch::banknumber n,
     const std::string & aname
 ) :
     m_name      (aname),
@@ -125,7 +166,7 @@ patchbank::patchbank
 }
 
 int
-patchbank::set_patch_name_list (const patch::list & lst)
+patchbank::set_patch_name_list (const patch::namelist & lst)
 {
     m_patch_name_list = lst;
     m_patch_list_name.clear();
