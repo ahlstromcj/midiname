@@ -1,0 +1,86 @@
+Ardour Patchfiles with no ChannelNameSets
+Chris Ahlstrom
+2026-03-19 to 2026-03-19
+
+About 74 out of the 470 *.midnam files in /usr/share/ardour9/patchfiles
+do not have a ChannelNameSet element. Instead of being contained in a
+ChannelNameSet, the PatchNameList is contained in an ExtendingDeviceNames.
+
+Size    Name
+
+91055   Alesis_Q_Cards.midnam
+45087   E_mu_Systems_P2000_Audity.midnam
+35546   E_mu_Systems_P2000_Beat_Garden.midnam
+67145   E_mu_Systems_P2000_Composer.midnam
+27351   E_mu_Systems_P2000_Definitive_B3.midnam
+ 9881   E_mu_Systems_P2000_Holy_Grail.midnam
+35103   E_mu_Systems_P2000_Mo_Phatt.midnam
+44981   E_mu_Systems_P2000_MP_7_MROM1.midnam
+28187   E_mu_Systems_P2000_Orchestral1.midnam
+18986   E_mu_Systems_P2000_Orchestral2.midnam
+35611   E_mu_Systems_P2000_Planet_Earth.midnam
+36469   E_mu_Systems_P2000_Protean_Drums.midnam
+44993   E_mu_Systems_P2000_Proteus_Pop.midnam
+35234   E_mu_Systems_P2000_Protozoa.midnam
+19107   E_mu_Systems_P2000_PS_Orchestra.midnam
+36120   E_mu_Systems_P2000_Pure_Phat.midnam
+45703   E_mu_Systems_P2000_Sound_of_the_ZR.midnam
+36841   E_mu_Systems_P2000_Techno_Synth.midnam
+36263   E_mu_Systems_P2000_Vintage_Collection.midnam
+36194   E_mu_Systems_P2000_World_Expedition.midnam
+35755   E_mu_Systems_P2000_XL_7_ROM.midnam
+36217   E_mu_Systems_P2000_X_Lead.midnam
+18643   E_mu_Systems_P2000_XTREM.midnam
+89301   Korg_Triton_Expansion.midnam
+13973   Kurzweil_K2000_Expansion.midnam
+16149   Kurzweil_K2500_2600_Expansion.midnam
+ 7106   Lexicon_DR_Music_FX_Expansion.midnam
+17241   Lexicon_Dual_FX_Expansion.midnam
+13704   Lexicon_Dual_Vrb_Expansion.midnam
+ 7056   Lexicon_Pitch_FX_Expansion.midnam
+ 7051   Lexicon_SMG_Post_FX_Expansion.midnam
+52159   Roland_60s_70s_Expansion.midnam
+36180   Roland_Asia_Expansion.midnam
+14958   Roland_Bass&Drums_Expansion.midnam
+ 7311   Roland_Big_Brass_Expansion.midnam
+31123   Roland_Complete_Orchestra_Exp.midnam
+ 3978   Roland_Concert_Piano_Expansion.midnam
+ 3936   Roland_Concert_Piano_Exp.midnam
+64124   Roland_Country_Expansion.midnam
+53041   Roland_Dance_Expansion.midnam
+ 8707   Roland_Dynamic_Drums_Expansion.midnam
+ 8658   Roland_Dynamic_Drums_Exp.midnam
+31196   Roland_Experience_2_Expansion.midnam
+17965   Roland_Experience_Expansion.midnam
+53391   Roland_Hip_Hop_Expansion.midnam
+53708   Roland_House_Expansion.midnam
+67511   Roland_Latin_Expansion.midnam
+69497   Roland_Orchestral_Expansion.midnam
+67469   Roland_Orchestral_II_Expansion.midnam
+33049   Roland_Piano_Expansion.midnam
+31878   Roland_Platinum_Trax_Expansion.midnam
+26972   Roland_Platinum_Trax_Exp.midnam
+45912   Roland_Pop_Expansion.midnam
+66396   Roland_Session_Expansion.midnam
+66565   Roland_Special_FX_Expansion.midnam
+ 9973   Roland_Studio_Expansion.midnam
+ 9922   Roland_Studio_Exp.midnam
+53198   Roland_Super_Sound_Expansion.midnam
+23575   Roland_Supreme_Dance_Expansion.midnam
+23475   Roland_Supreme_Dance_Exp.midnam
+ 9214   Roland_Symphonic_Strings_Exp.midnam
+53687   Roland_Techno_Expansion.midnam
+33152   Roland_Ultimate_Keys_Expansion.midnam
+27774   Roland_Ultimate_Keys_Exp.midnam
+52226   Roland_Vintage_Synth_Expansion.midnam
+27411   Roland_Vocal_Expansion.midnam
+29110   Roland_World_Collection_Exp.midnam
+52063   Roland_World_Expansion.midnam
+ 9782   Yamaha_PLG100_XG_Expansion.midnam
+24887   Yamaha_PLG150_AN_Expansion.midnam
+10926   Yamaha_PLG150_DR_PC_Expansion.midnam
+17034   Yamaha_PLG150DX_Expansion.midnam
+ 8848   Yamaha_PLG150PF_Expansion.midnam
+16936   Yamaha_PLG150VL_Expansion.midnam
+
+# vim: sw=4 ts=4 wm=8 et ft=sh

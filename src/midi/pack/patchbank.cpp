@@ -25,7 +25,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-15
- * \updates       2026-03-16
+ * \updates       2026-03-18
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to patches.
@@ -75,6 +75,12 @@
  *                          ControlChange x 2
  *                      PatchNameList
  *                          Patch ...
+ *
+ *      E_mu_Systems_P2000_X_Lead.midnam:
+ *
+ *              ExtendingDeviceNames>
+ *                  PatchNameList
+ *                      Patch ...
  */
 
 #include "midi/pack/patchbank.hpp"      /* midi::pack::patch & patchbank    */
@@ -156,11 +162,13 @@ patch::patch
 
 patchbank::patchbank
 (
-    patch::banknumber n,
-    const std::string & aname
+    const std::string & name,
+    bool hasrom,
+    patch::banknumber n
 ) :
-    m_name      (aname),
-    m_number    (n)
+    m_name      (name),
+    m_number    (n),
+    m_has_rom   (hasrom)
 {
     // no code
 }
@@ -174,6 +182,38 @@ patchbank::set_patch_name_list (const patch::namelist & lst)
         p.set_bank(m_number);
 
     return 0;
+}
+
+/**
+ *  class patchbanks
+ */
+
+void
+patchbanks::add (const patchbank & pb)
+{
+    patch_banks().push_back(pb);
+}
+
+/**
+ *  This function makes it more convenient for callers to get the
+ *  list of patchbank names.
+ */
+
+lib66::tokenization
+patchbanks::names () const
+{
+    lib66::tokenization result;
+    for (const auto & pb : patch_banks())
+    {
+        if (pb.name().empty())
+        {
+            result.clear();
+            break;
+        }
+        else
+            result.push_back(pb.name());
+    }
+    return result;
 }
 
 }           // namespace pack

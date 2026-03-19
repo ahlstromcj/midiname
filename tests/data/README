@@ -1,11 +1,14 @@
 Tests/Data Directory for the Midiname library
 Chris Ahlstrom
-2026-02-20 to 2026-03-09
+2026-02-20 to 2026-03-19
 
 This file describes the data associated with the test application.
+The *.midnam files illustrate different flavors of XML hierarchies.
 
     Files from the /usr/share/ardour9/patchfile directory:
             
+        Kurzweil_SP88x.midnam
+        Lexicon_DR_Music_FX_Expansion.midnam
         Roland_MT_32.midnam
         Roland_SC_88_Pro.midnam
         Yamaha_PSR_S900.midnam

@@ -58,9 +58,11 @@ namespace nam
 
 MidiPatchManager::MidiPatchManager ()
 {
-    // this is from ardour's search_paths.cc/h.
-    //
-    // add_search_path(midi_patch_search_path());
+    /*
+     * This is from ardour's search_paths.cc/h.
+     *
+     *      add_search_path(midi_patch_search_path());
+     */
 }
 
 /**
@@ -70,12 +72,13 @@ MidiPatchManager::MidiPatchManager ()
 MidiPatchManager::~MidiPatchManager ()
 {
 #if defined USE_SINGLETON_MIDIPATCHMANAGER
-    m_manager = nullptr;            // why bother? shouldn't we delete it?
+    m_manager = nullptr;            /* why bother? shouldn't we delete it?  */
 #endif
 }
 
 /**
- *  Adds the files in a util::searchpath to the patch-manager's util::searchpath
+ *  Adds the files in a util::searchpath to the patch-manager's
+ *  util::searchpath.
  */
 
 void
@@ -84,7 +87,7 @@ MidiPatchManager::add_search_paths (const util::searchpath & srch_paths)
     for (const auto & f : srch_paths.paths())
     {
         if (search_paths().contains(f))
-            continue;               // already processed files from this path
+            continue;               /* already processed files from this    */
 
         if (util::file_exists(f))
             continue;
@@ -162,10 +165,12 @@ MidiPatchManager::add_midnam_files_from_directory
     std::string rgx { util::glob_to_regex("*.midnam") };
     (void) util::fts_find_files_by_regex(collected, paths, rgx);
 
-    // P_() is a variation on dgettext() and figures out plurals.
-    // P_("Loading %1 MIDI patch from %2",
-    //     "Loading %1 MIDI patches from %2", collected.size()),
-    //     collected.size(), directory_path) << endmsg;
+    /*
+     * P_() is a variation on dgettext() and figures out plurals.
+     * P_("Loading %1 MIDI patch from %2",
+     *     "Loading %1 MIDI patches from %2", collected.size()),
+     *     collected.size(), directory_path) << endmsg;
+     */
 
     std::string msg
     {
@@ -178,8 +183,10 @@ MidiPatchManager::add_midnam_files_from_directory
     std::cout << msg << std::endl;
     for (auto i : collected)
     {
-        // if (stop_thread)
-        //     break;
+        /*
+         * if (stop_thread)
+         *     break;
+         */
 
         load_midi_name_document(i);
     }
@@ -337,7 +344,8 @@ MidiPatchManager::next_patch
         return PatchPtr();
 }
 
-/* MidiPatchManager:: */ // CustomDeviceModeNames = std::list<std::string>;
+/* MidiPatchManager:: */
+/* CustomDeviceModeNames = std::list<std::string>; */
 
 CustomDeviceModeNames
 MidiPatchManager::custom_device_mode_names_by_model
@@ -358,10 +366,7 @@ MidiPatchManager::custom_device_mode_names_by_model
 
 /**
  *  For each device in the device-names list, if not already in the
- *  documents:
- *
- *      -   
- *
+ *  documents...
  */
 
 bool

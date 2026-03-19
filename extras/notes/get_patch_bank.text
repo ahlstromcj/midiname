@@ -1,0 +1,57 @@
+Notes on Retrieving PatchBanks and Patches
+Chris Ahlstrom
+2026-03-19 to 2026-03-19
+
+Getting a list of PatchBanks.
+
+-   Select a *.midnam file (i.e. a specific MIDI device) or a loaded
+    XML document.
+
+-   Find the next PatchBank
+
+    i. If found, add the Name to the list, with an ordinal number.
+       [ patchbanks::add() ].
+   ii. If not found, return the current list as a vector of strings
+       [ lib66::tokenization patchbanks::names() ].
+
+Getting a particular Patch.
+
+-   Select a *.midnam file (i.e. a specific MIDI device) or a loaded
+    XML document.
+
+-   Select a PatchBank
+    -  By name
+    -  By ordinal number (LATER!)
+
+    -   Determine the PatchBank style. There seems to be three styles:
+        (1) PatchBanks enclosing a PatchNameList holding Patches;
+        (2) PatchBanks having a UsesPatchNameList;
+        (3) Merely a set of PatchNameLists that act like a PatchBank.
+        
+        If there is an ExtendingDeviceNames element, then (3) is
+        in force, otherwise it is (1) or (2).
+
+    a. ChannelNameSet / PatchBank / PatchNameList / Patch...
+    b. ChannelNameSet / PatchBank / PatchNameList / Patch / PatchMIDICommands
+    c. ChannelNameSet / PatchBank / MIDICommands / PatchNameList / Patch...
+
+         i. Find the PatchBank.
+        ii. Look for PatchNameList in that bank.
+       iii. If not found, go to d.
+        iv. If the list is found, then iterate for each Patch until
+            there are no more.
+         v. Otherwise, return an error.
+
+    d. ChannelNameSet / PatchBank / MIDICommands | UsesPatchNameList /
+            PatchNameList / Patch...
+       
+         i. Find the PatchBank.
+        ii. Look for UsesPatchNameList.
+            - If found, use that Name to find that PatchNameList.
+            - If not found, return an error.
+       iii. If the list is found, then iterate for each Patch until
+            there are no more.
+
+    e. ExtendingDeviceNames / PatchNameList / Patch...
+
+# vim: sw=4 ts=4 wm=8 et ft=sh
