@@ -35,6 +35,10 @@ Getting a particular Patch.
     b. ChannelNameSet / PatchBank / PatchNameList / Patch / PatchMIDICommands
     c. ChannelNameSet / PatchBank / MIDICommands / PatchNameList / Patch...
 
+       [ Roland_MT_32.midnam ]
+       [ Roland_SC_88_Pro.midnam ]
+       [ Yamaha_PSR_S900.midnam ]
+
          i. Find the PatchBank.
         ii. Look for PatchNameList in that bank.
        iii. If not found, go to d.
@@ -45,6 +49,8 @@ Getting a particular Patch.
     d. ChannelNameSet / PatchBank / MIDICommands | UsesPatchNameList /
             PatchNameList / Patch...
        
+       [ Kurzweil_SP88x.midnam ]
+       
          i. Find the PatchBank.
         ii. Look for UsesPatchNameList.
             - If found, use that Name to find that PatchNameList.
@@ -53,5 +59,7 @@ Getting a particular Patch.
             there are no more.
 
     e. ExtendingDeviceNames / PatchNameList / Patch...
+
+       [ Lexicon_DR_Music_FX_Expansion.midnam ]
 
 # vim: sw=4 ts=4 wm=8 et ft=sh

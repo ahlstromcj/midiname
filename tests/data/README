@@ -1,6 +1,6 @@
 Tests/Data Directory for the Midiname library
 Chris Ahlstrom
-2026-02-20 to 2026-03-19
+2026-02-20 to 2026-03-22
 
 This file describes the data associated with the test application.
 The *.midnam files illustrate different flavors of XML hierarchies.
@@ -8,10 +8,47 @@ The *.midnam files illustrate different flavors of XML hierarchies.
     Files from the /usr/share/ardour9/patchfile directory:
             
         Kurzweil_SP88x.midnam
+
+            MasterDeviceNames
+                CustomDeviceMode
+                    ChannelNameSet
+                        PatchBank
+                            UsesPatchNameList
+                    PatchNameList
+                        Patch(es)
+
         Lexicon_DR_Music_FX_Expansion.midnam
+
+            ExtendingDeviceNames
+                PatchNameList (2 of them)
+                    Patch(es)
+
         Roland_MT_32.midnam
+
+            MasterDeviceNames
+                CustomDeviceMode
+                    ChannelNameSet(s)
+                        PatchBank(s)
+                            PatchNameList(s)
+                                Patch(es)
+
         Roland_SC_88_Pro.midnam
+
+            MasterDeviceNames
+                CustomDeviceMode
+                    ChannelNameSet(s)
+                        PatchBank(s)
+                            PatchNameList(s)
+                                Patch
+
         Yamaha_PSR_S900.midnam
+
+            MasterDeviceNames
+                CustomDeviceMode(s)
+                    ChannelNameSet(s)
+                        PatchBank(s)
+                            PatchNameList(s)
+                                Patch
 
     File from https://github.com/SquishyCat/MIDI-Configs:
 
