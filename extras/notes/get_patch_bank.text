@@ -10,8 +10,11 @@ Getting a list of PatchBanks.
 -   Find the next PatchBank
 
     i. If found, add the Name to the list, with an ordinal number.
+
        [ patchbanks::add() ].
+
    ii. If not found, return the current list as a vector of strings
+
        [ lib66::tokenization patchbanks::names() ].
 
 Getting a particular Patch.

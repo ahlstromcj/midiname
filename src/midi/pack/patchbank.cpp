@@ -25,7 +25,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-15
- * \updates       2026-03-18
+ * \updates       2026-03-23
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to patches.
@@ -76,7 +76,7 @@
  *                      PatchNameList
  *                          Patch ...
  *
- *      E_mu_Systems_P2000_X_Lead.midnam:
+ *      E_mu_Systems_P2000_X_Lead.midnam or Kurzweil_SP88x.midnam:
  *
  *              ExtendingDeviceNames>
  *                  PatchNameList

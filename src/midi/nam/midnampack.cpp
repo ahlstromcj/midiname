@@ -25,7 +25,7 @@
  * \library       midiname
  * \author        Chris Ahlstrom
  * \date          2026-03-20
- * \updates       2026-03-22
+ * \updates       2026-03-23
  * \license       See above.
  *
  */
@@ -41,8 +41,13 @@ namespace midi
 namespace nam
 {
 
-midnampack::midnampack (const std::string & midnamfile) :
-    m_midnam_filename (midnamfile)
+midnampack::midnampack
+(
+    const std::string & midnamfile,
+    bool isverbose
+) :
+    m_is_verbose        (isverbose),
+    m_midnam_filename   (midnamfile)
 {
     // When should we call open()?
 }
@@ -50,7 +55,7 @@ midnampack::midnampack (const std::string & midnamfile) :
 bool
 midnampack::error (const std::string & msg)
 {
-    std::cout << "midnampack error: " << msg << std::endl;
+    std::cerr << "midnampack error: " << msg << std::endl;
     m_has_error = true;
     m_error_message = msg;
     return false;                       /* indicates a status of "error"    */
@@ -89,16 +94,31 @@ midnampack::patch_style_name () const
  */
 
 bool
-midnampack::open (const std::string & midnamfile)
+midnampack::open ()
 {
     xml66::XMLTree * xmldoc
     {
-        new (std::nothrow) xml66::XMLTree(midnamfile)
+        new (std::nothrow) xml66::XMLTree(midnam_filename())
     };
     bool result { bool(xmldoc) };
     if (result)
+    {
         result = xmldoc->is_valid();
-
+        if (! result)
+        {
+            std::cerr
+                << "File " << midnam_filename() << " is not valid."
+                << std::endl
+                ;
+        }
+    }
+    else
+    {
+        std::cerr
+            << "Could not create XMLTree from " << midnam_filename()
+            << std::endl
+            ;
+    }
     if (result)
     {
         xml66::SharedNodeListPtr found { xmldoc->find("//MIDINameDocument") };
@@ -107,7 +127,7 @@ midnampack::open (const std::string & midnamfile)
 
         if (result)
         {
-            found = xmldoc->find("//ExtendingDeviceName");
+            found = xmldoc->find("//ExtendingDeviceNames");
             if (found->size() != 0)
             {
                 m_patch_style = patchstyle::extending_device_list;
@@ -133,12 +153,34 @@ midnampack::open (const std::string & midnamfile)
     if (result && is_verbose())
     {
         std::cout
-            << "The patch style of " << patch_style_name()
-            << "is " << midnam_filename() << "."
+            << "The patch style of " << midnam_filename()
+            << " is " << patch_style_name() << "."
             << std::endl
             ;
     }
     return result;
+}
+
+/**
+ *  Returns the XML document pointer as a reference, first creating it if
+ *  need be, with a "true" parameter to validate the file. We let it throw
+ *  an exception if the XMLTree cannot be created.
+ *
+ *      using tree = std::unique_ptr<xml66::XMLTree>
+ */
+
+xml66::XMLTree &
+midnampack::xml_doc ()
+{
+    if (bool(m_xml_doc))
+    {
+        return *m_xml_doc;
+    }
+    else
+    {
+        m_xml_doc.reset(new xml66::XMLTree(midnam_filename(), true));
+        return *m_xml_doc;
+    }
 }
 
 /*
@@ -152,9 +194,9 @@ midnampack::open (const std::string & midnamfile)
 bool
 midnampack::get_patch_name_list ()
 {
-#if defined THIS_CODE_IS_READY
-
-    const xml66::XMLTree & doc { *xml_doc() };
+#if 0
+    // const xml66::XMLTree & doc { xml_doc() };
+    midi::name::MIDINameDocument doc(....................)
     midi::nam::MasterDeviceNamesPtr masterDeviceNames
     {
         doc.master_device_names_by_model().find(model)->second
@@ -182,8 +224,8 @@ midnampack::get_patch_name_list ()
     const midi::nam::PatchNameList & plist { bank->patch_name_list() };
     if (plist.size() == 0)
         return error("No PatchNameList");
-
 #endif
+
     return true;
 }
 
@@ -196,7 +238,7 @@ midnampack::get_patch_name_list ()
 bool
 midnampack::get_uses_patch_name_list ()
 {
-    const xml66::XMLTree & doc { *xml_doc() };
+    const xml66::XMLTree & doc { xml_doc() };
     return true;
 }
 
@@ -208,7 +250,7 @@ midnampack::get_uses_patch_name_list ()
 bool
 midnampack::get_extending_device_list ()
 {
-    const xml66::XMLTree & doc { *xml_doc() };
+    const xml66::XMLTree & doc { xml_doc() };
     return true;
 }
 

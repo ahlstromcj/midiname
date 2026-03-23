@@ -982,7 +982,11 @@ public:
 
     MIDINameDocument () = default;
     MIDINameDocument (const std::string & file_path);
-    virtual ~MIDINameDocument () = default;
+    MIDINameDocument (const MIDINameDocument & id) = delete;
+    MIDINameDocument & operator = (const MIDINameDocument & id) = delete;
+    MIDINameDocument (MIDINameDocument && id) = delete;
+    MIDINameDocument & operator = (MIDINameDocument && id) = delete;
+    virtual ~MIDINameDocument () = default;     // IS THIS RIGHT?
 
     const std::string & file_path () const
     {

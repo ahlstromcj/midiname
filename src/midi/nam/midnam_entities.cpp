@@ -1312,7 +1312,13 @@ MIDINameDocument::MIDINameDocument (const std::string & file_path) :
     {
         throw lib66::failed_constructor("MIDINameDocument");
     }
-    document.set_filename(file_path);
+
+    /*
+     * Redundant.
+     *
+     * document.set_filename(file_path);
+     */
+
     set_state(document, *document.root());
 }
 
@@ -1341,7 +1347,7 @@ MIDINameDocument::set_state
     {
         tree.find("//MasterDeviceNames")
     };
-    for (auto i : *master_device_names_list)
+    for (auto i : *master_device_names_list)        /* usually just one?    */
     {
         MasterDeviceNamesPtr master_device_names(new MasterDeviceNames());
         if (master_device_names->set_state(tree, *i))

@@ -551,15 +551,11 @@ const std::string help_intro
     "midiname library.  Options are as follows:\n\n"
 };
 
+}           // namespace anonymous
+
 /*--------------------------------------------------------------------------
  * Main
  *--------------------------------------------------------------------------*/
-
-}           // namespace anonymous
-
-/*
- * main() routine
- */
 
 int
 main (int argc, char * argv [])

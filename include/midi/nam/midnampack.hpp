@@ -28,7 +28,7 @@
  * \library       midiname
  * \author        Chris Ahlstrom
  * \date          2026-03-20
-2* \updates       2026-03-22
+2* \updates       2026-03-23
  * \license       See above.
  *
  */
@@ -48,6 +48,8 @@ namespace nam
 class midnampack
 {
 
+public:
+
     /**
      *  Indicates the way patches are organized in the loaded *.midnam
      *  file. See the discussion in the extras/notes/get_patch_bank.text
@@ -62,6 +64,12 @@ class midnampack
         undetermined
     };
 
+private:
+
+    /**
+     *  An abbreviation.
+     */
+
     using tree = std::unique_ptr<xml66::XMLTree>;
 
 private:
@@ -70,7 +78,7 @@ private:
      *  Error notification items; a boolean and a string.
      */
 
-    bool m_is_verbose { true };         /* true while writing class code    */
+    bool m_is_verbose { false };
     bool m_has_error { false };
     std::string m_error_message { };
     std::string m_midnam_filename { };
@@ -90,7 +98,7 @@ private:
 
 public:
 
-    midnampack (const std::string & midnamfile);
+    midnampack (const std::string & midnamfile, bool isverbose = false);
     midnampack (const midnampack & id) = default;
     midnampack & operator = (const midnampack & id) = default;
     midnampack (midnampack && id) = default;
@@ -103,7 +111,7 @@ public:
     }
 
     bool error (const std::string & msg);
-    bool open (const std::string & midnamfile);
+    bool open ();
 
     bool has_error () const
     {
@@ -131,14 +139,11 @@ public:
 
 private:
 
-    tree & xml_doc ()
-    {
-        return m_xml_doc;
-    }
+    xml66::XMLTree & xml_doc ();
 
-    const tree & xml_doc () const
+    const xml66::XMLTree & xml_doc () const
     {
-        return m_xml_doc;
+        return std::as_const(xml_doc());
     }
 
     bool get_patch_name_list ();
