@@ -27,18 +27,17 @@
  *
  * \library       midiname library
  * \author        Chris Ahlstrom
- * \date          2026-03-17
- * \updates       2026-03-17
+ * \date          2026-03-23
+ * \updates       2026-03-24
  * \version       $Revision$
  *
- *  This module contains the midi::pack classes related to midicommands.
- *  No XML code is involved; no pointers are involved.
+ *  This module defines the midi::pack::midicommands class. It's name is a
+ *  bit misleading; it is used in a limited context.
  */
 
-#include <cstdint>                      /* std::uint16_t, uint8_t           */
-#include <list>                         /* std::list<>                      */
-#include <map>                          /* std::map<>                       */
-#include <string>                       /* std::string<>                    */
+#include <vector>                       /* std::vector<>                    */
+
+#include "midi/pack/controlchange.hpp"  /* class midi::pack::controlchange  */
 
 namespace midi
 {
@@ -47,197 +46,57 @@ namespace pack
 {
 
 /**
- * This element is not found in any of Ardour's patchfiles.
- */
-
-class mididelay
-{
-
-private:
-
-    int m_milliseconds;
-
-public:
-
-    mididelay () = default;
-
-    mididelay (int ms) : m_milliseconds (ms)
-    {
-        // no code
-    }
-
-    mididelay (const mididelay & id) = default;
-    mididelay & operator = (const mididelay & id) = default;
-    mididelay (mididelay && id) = default;
-    mididelay & operator = (mididelay && id) = default;
-    ~mididelay () = default;
-
-    int milliseconds () const
-    {
-        return m_milliseconds;
-    }
-
-};          // class mididelay
-
-/**
- *  This class is just a placeholder for MIDIChannelMessage, which
- *  is defined in MIDIEvents10.dtd. It covers more than we need to
- *  deal with at this time.
+ *  midicommands.
  *
- *  MIDIChannelVoiceMessage:
+ *  In a *.midnam file, there is one or two ControlChange elements:
  *
- *      NoteOn | NoteOff | PolyKeyPressure | ControlChange | ProgramChange |
- *      ChannelKeyPressure | PitchBendChange
+ *        <ControlChange Control="32" Value="0"/>
  *
- *  MIDIChannelModeMessage:
+ *  or
  *
- *      AllSoundOff | ResetAllControllers | LocalControl | AllNotesOff |
- *      OmniOff | OmniOn | MonoMode | PolyMode
- *
- *  MIDIChannelMessage:
- *
- *      %MIDIChannelVoiceMessage; | %MIDIChannelModeMessage
- *
- *  MIDISystemMessage:
- *
- *      SysEx | MTCQuarterFrame | SongPositionPointer | SongSelect |
- *      TuneRequest | TimingClock | Start | Continue | Stop |
- *      ActiveSensing | SystemReset
- *
- *  MIDIMessage:
- *
- *      %MIDIChannelMessage | %MIDISystemMessage
- */
-
-class midichannelmessage
-{
-
-public:
-
-    midichannelmessage () = default;
-    midichannelmessage (const midichannelmessage & id) = default;
-    midichannelmessage & operator = (const midichannelmessage & id) = default;
-    midichannelmessage (midichannelmessage && id) = default;
-    midichannelmessage & operator = (midichannelmessage && id) = default;
-    ~midichannelmessage () = default;
-
-};          // class midichannelmessage
-
-/**
- *  A simple ID code.
- */
-
-class sysexdeviceid
-{
-
-private:
-
-    int m_offset;
-
-public:
-
-    sysexdeviceid () = default;
-
-    sysexdeviceid (int offset) : m_offset (offset)
-    {
-        // no code
-    }
-
-    sysexdeviceid (const sysexdeviceid & id) = default;
-    sysexdeviceid & operator = (const sysexdeviceid & id) = default;
-    sysexdeviceid (sysexdeviceid && id) = default;
-    sysexdeviceid & operator = (sysexdeviceid && id) = default;
-    ~sysexdeviceid () = default;
-
-    int offset () const
-    {
-        return m_offset;
-    }
-
-};          // class sysexdeviceid
-
-/**
- *  Format:
- *
- *      F0 manid devid modelid direction address   data checksum terminator
- *      F0 0x41  0x10  0x42    0x12      0x40007F  0x00 0x41     0xF7
- *
- *  <SysEx>
- *      F0 41 <SysExDeviceID Offset="00"/> 42 12 40 00 7F 00 41 F7
- *  </SysEx>
- *
- *  For now, we just get the bytes.
- */
-
-class sysex
-{
-
-private:
-
-    sysexdeviceid m_device_id;
-
-    unsigned char * m_message_bytes;
-
-    std::size_t m_message_size;
-
-public:
-
-    sysex () = default;
-    sysex (const sysex & id) = delete;
-    sysex & operator = (const sysex & id) = delete;
-    sysex (sysex && id) = default;
-    sysex & operator = (sysex && id) = default;
-    ~sysex () = default;    // FIXME
-
-};          // class sysex
-
-/**
- *  midicommands
+ *        <ControlChange Control="0" Value="0"/>
+ *        <ControlChange Control="32" Value="3"/>
  */
 
 class midicommands
 {
 
-public:
-
-    // using namelist = std::list<midicommands>;
-    // using bank_number = std::uint16_t;
-    // using number = std::uint8_t;
-
 private:
 
     /**
-     *  The "Name" midicommands of the "<Patch>" item.
+     *  Matches the 'ControlChange' attribute. Generally there are one
+     *  or two fo these objects.
      */
 
-    std::string m_name { };
-
-    /**
-     *  Need to investigate this one.
-     */
+    std::vector<controlchange> m_control_changes { };
 
 public:
 
     midicommands () = default;
+
     midicommands
     (
-        const std::string & pname
-    );
+        int control, int value,
+        int control1 = (-1), int value1 = (-1)
+    ) :
+        m_control_changes   ()
+    {
+       controlchange cc { control, value };
+       m_control_changes.push_back(cc);
+       if (control1 >= 0)
+       {
+           controlchange cc2 { control1, value1 };
+           m_control_changes.push_back(cc2);
+       }
+    }
+
     midicommands (const midicommands & id) = default;
     midicommands & operator = (const midicommands & id) = default;
     midicommands (midicommands && id) = default;
     midicommands & operator = (midicommands && id) = default;
     ~midicommands () = default;
 
-    const std::string & name () const
-    {
-        return m_name;
-    }
-
-    void set_name (const std::string & name)
-    {
-        m_name = name;
-    }
+    // more to do
 
 };          // class midicommands
 

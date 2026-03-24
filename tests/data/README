@@ -1,13 +1,19 @@
 Tests/Data Directory for the Midiname library
 Chris Ahlstrom
-2026-02-20 to 2026-03-22
+2026-02-20 to 2026-03-24
 
 This file describes the data associated with the test application.
 The *.midnam files illustrate different flavors of XML hierarchies.
 
     Files from the /usr/share/ardour9/patchfile directory:
+
+        Korg_Volca_Bass.midnam:
+
+            UsesControlNameList Name="Controls"
+            ControlNameList Name="Controls"
+                Control Type="7bit" Number="5" Name="Slide Time" ...
             
-        Kurzweil_SP88x.midnam
+        Kurzweil_SP88x.midnam:
 
             MasterDeviceNames
                 CustomDeviceMode
@@ -17,13 +23,13 @@ The *.midnam files illustrate different flavors of XML hierarchies.
                     PatchNameList
                         Patch(es)
 
-        Lexicon_DR_Music_FX_Expansion.midnam
+        Lexicon_DR_Music_FX_Expansion.midnam:
 
             ExtendingDeviceNames
                 PatchNameList (2 of them)
                     Patch(es)
 
-        Roland_MT_32.midnam
+        Roland_MT_32.midnam:
 
             MasterDeviceNames
                 CustomDeviceMode
@@ -32,7 +38,7 @@ The *.midnam files illustrate different flavors of XML hierarchies.
                             PatchNameList(s)
                                 Patch(es)
 
-        Roland_SC_88_Pro.midnam
+        Roland_SC_88_Pro.midnam:
 
             MasterDeviceNames
                 CustomDeviceMode
@@ -41,7 +47,7 @@ The *.midnam files illustrate different flavors of XML hierarchies.
                             PatchNameList(s)
                                 Patch
 
-        Yamaha_PSR_S900.midnam
+        Yamaha_PSR_S900.midnam:
 
             MasterDeviceNames
                 CustomDeviceMode(s)

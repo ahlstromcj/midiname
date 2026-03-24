@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-15
- * \updates       2026-03-18
+ * \updates       2026-03-24
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to patches.
@@ -36,15 +36,16 @@
  *
  * Notes on data types:
  *
- *      -   CDATA. This is character data represented by a string. It can
- *          contain spaces. It is used often for the human-readable name of
- *          an entity, enclosed in quotes. In our diagrams, we call it simply
- *          "string."
+ *      -   CDATA. This is character data represented by a string. It
+ *          can contain spaces. It is used often for the human-readable
+ *          name of an entity, enclosed in quotes. In our diagrams, we
+ *          call it simply "string."
  *      -   NMTOKEN. This is a string that can contain letters, digits,
  *          and characters in the set { .-_: }. The most common use is
  *          to represent numbers as a quoted string. For numbers, in our
  *          diagrams, we call it "stringint".
- *      -   Boolean values are "false" or "true", which we call "stringbool".
+ *      -   Boolean values are "false" or "true", which we call
+ *          "stringbool".
  *
  *  This module defines the following classes, which are all ultimately
  *  contained indirectly by the patchbank class, as shown in the
@@ -59,6 +60,7 @@
 #include <vector>                       /* std::vector<>                    */
 
 #include "cpp_types.hpp"                /* lib66::tokenization vector       */
+#include "midi/pack/controlchange.hpp"   /* midi::pack::controlchange       */
 #include "midi/pack/midicommands.hpp"   /* midi::pack::midicommands         */
 
 namespace midi
@@ -125,77 +127,6 @@ public:
     }
 
 };          // class programchange
-
-/**
- *  ControlChange. A small object used in conjunction with PatchMIDICommands.
- *  It provides a value needed to change to a different patch.
- *
- *  If present, a common case is inside a PatchMIDICommands, with two of
- *  these objects, one with Control = 0, and the other with Control = 32.
- *  RPN, NRPN?
- *
- *  Another case in PatchMIDICommands is just one object with Control = 0.
- *  In them we see the patch number ending with a "+" or a "#".
- *
- *  This name is used as an attribute in a Patch or PatchMIDICommands
- *  entity. It is defined in MIDIEvents.dtd.
- */
-
-class controlchange
-{
-
-public:
-
-    using list = std::vector<controlchange>;
-
-private:
-
-    /**
-     *  Attribute: "Control"
-     *
-     *  The control number. It's stored here as an integer, but it is an
-     *  8-bit quantity (std::uint8_t).
-     */
-
-    int m_ctrl_number { 0 };
-
-    /**
-     *  Attribute: "Value"
-     *
-     *  The value of the control. It's stored here as an integer, but it is
-     *  an 8-bit quantity (std::uint8_t).
-     */
-
-    int m_ctrl_value { 0 };
-
-public:
-
-    controlchange () = default;
-
-    controlchange (int controlno, int value) :
-        m_ctrl_number   (controlno),
-        m_ctrl_value    (value)
-    {
-        // no code
-    }
-
-    controlchange (const controlchange & id) = default;
-    controlchange & operator = (const controlchange & id) = default;
-    controlchange (controlchange && id) = default;
-    controlchange & operator = (controlchange && id) = default;
-    ~controlchange () = default;
-
-    int ctrl_number () const
-    {
-        return m_ctrl_number;
-    }
-
-    int ctrlk_value () const
-    {
-        return m_ctrl_value;
-    }
-
-};          // class controlchange
 
 /**
  *  This element (PatchMIDICommands) is included, when used, in a Patch

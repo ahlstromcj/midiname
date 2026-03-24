@@ -1,0 +1,487 @@
+Notes on Retrieving PatchBanks and Patches
+Chris Ahlstrom
+2026-03-24 to 2026-03-24
+
+This document lists the MIDNAM files provided by an installation of
+Ardour on Linux in /usr/share/ardour/patchfiles.
+
+Of special note is MIDI.midnam, which describes the settings for
+General MIDI. These includes patch-bank change controls, program
+and drum-kit patches, control numbers and names, and drum-kit note
+names.
+
+
+Total 23M
+
+ 40K Access_Virus_A.midnam
+ 76K Access_Virus_B_KB_Indigo.midnam
+ 76K Access_Virus_Rack.midnam
+ 64K Alesis_DM5.midnam
+ 24K Alesis_MicroVerb4.midnam
+ 20K Alesis_MIDIVerb_4.midnam
+ 12K Alesis_MIDIVerb_III.midnam
+ 12K Alesis_MIDIVerb_II.midnam
+ 20K Alesis_NanoBass.midnam
+ 20K Alesis_NanoPiano.midnam
+ 48K Alesis_NanoSynth.midnam
+ 24K Alesis_Q20.midnam
+ 92K Alesis_Q_Cards.midnam
+ 52K Alesis_QS6_1.midnam
+ 52K Alesis_QS6.midnam
+ 52K Alesis_QS7_1_8_1.midnam
+ 68K Alesis_QS78.midnam
+ 24K Alesis_QuadraSynth.midnam
+ 48K Alesis_QuadraSynth_Plus.midnam
+ 12K Alesis_Quadraverb_2.midnam
+ 12K Alesis_Quadraverb_Plus.midnam
+ 24K Alesis_S4.midnam
+ 48K Alesis_S4_Plus.midnam
+ 40K Alesis_SR_16.midnam
+ 12K ART_Multiverb_Alpha_2_0.midnam
+ 80K Bitheadz_Retro_AS_1.midnam
+8.0K Casio_CZ_1.midnam
+ 44K Clavia_Nord_Lead_II.midnam
+ 52K Clavia_Nord.midnam
+ 88K Clavia_Nord_Rack_3.midnam
+ 12K Digidesign_MP1.midnam
+ 12K Digitech_DSP_128.midnam
+ 16K Digitech_DSP128plus.midnam
+ 12K Digitech_Quad_4.midnam
+ 20K Digitech_S100.midnam
+ 12K Digitech_Whammy_DT.midnam
+ 36K DSI_Evolver.midnam
+ 44K DSI_Mopho.midnam
+ 44K DSI_Tetra.midnam
+ 12K Dynacord_DRP_20X.midnam
+ 76K E_mu_Mo_Phatt.midnam
+ 80K E_mu_Orbit_3.midnam
+108K E_mu_Proteus_2000.midnam
+104K E_mu_Systems_HALO.midnam
+104K E_mu_Systems_MK_6.midnam
+ 96K E_mu_Systems_Mo_Phatt.midnam
+ 48K E_mu_Systems_Morpheus.midnam
+ 96K E_mu_Systems_MP_7.midnam
+ 24K E_mu_Systems_MPS.midnam
+ 40K E_mu_Systems_MPS_Orch.midnam
+ 40K E_mu_Systems_Orbit.midnam
+ 48K E_mu_Systems_Orbit_V2.midnam
+ 48K E_mu_Systems_P2000_Audity.midnam
+ 36K E_mu_Systems_P2000_Beat_Garden.midnam
+ 68K E_mu_Systems_P2000_Composer.midnam
+ 28K E_mu_Systems_P2000_Definitive_B3.midnam
+ 12K E_mu_Systems_P2000_Holy_Grail.midnam
+ 36K E_mu_Systems_P2000_Mo_Phatt.midnam
+ 44K E_mu_Systems_P2000_MP_7_MROM1.midnam
+ 28K E_mu_Systems_P2000_Orchestral1.midnam
+ 20K E_mu_Systems_P2000_Orchestral2.midnam
+ 36K E_mu_Systems_P2000_Planet_Earth.midnam
+ 36K E_mu_Systems_P2000_Protean_Drums.midnam
+ 44K E_mu_Systems_P2000_Proteus_Pop.midnam
+ 36K E_mu_Systems_P2000_Protozoa.midnam
+ 20K E_mu_Systems_P2000_PS_Orchestra.midnam
+ 36K E_mu_Systems_P2000_Pure_Phat.midnam
+ 48K E_mu_Systems_P2000_Sound_of_the_ZR.midnam
+ 36K E_mu_Systems_P2000_Techno_Synth.midnam
+ 36K E_mu_Systems_P2000_Vintage_Collection.midnam
+ 36K E_mu_Systems_P2000_World_Expedition.midnam
+ 36K E_mu_Systems_P2000_XL_7_ROM.midnam
+ 36K E_mu_Systems_P2000_X_Lead.midnam
+ 20K E_mu_Systems_P2000_XTREM.midnam
+104K E_mu_Systems_PK_6.midnam
+ 96K E_mu_Systems_Planet_Earth.midnam
+ 48K E_mu_Systems_Planet_Phatt.midnam
+ 12K E_mu_Systems_Procussion.midnam
+ 12K E_mu_Systems_Proteus_1.midnam
+ 12K E_mu_Systems_Proteus_1_w_Protologic.midnam
+ 12K E_mu_Systems_Proteus_1_XR.midnam
+ 12K E_mu_Systems_Proteus_1_XR_Orch.midnam
+ 96K E_mu_Systems_Proteus_2500.midnam
+ 12K E_mu_Systems_Proteus_2.midnam
+ 12K E_mu_Systems_Proteus_2_XR.midnam
+ 12K E_mu_Systems_Proteus_3.midnam
+ 12K E_mu_Systems_Proteus_3_XR.midnam
+ 56K E_mu_Systems_Proteus_Custom.midnam
+148K E_mu_Systems_ProteusFX.midnam
+ 20K E_mu_Systems_SoundEngine.midnam
+ 48K E_mu_Systems_UltraProteus.midnam
+ 12K E_mu_Systems_Vintage_Keys.midnam
+ 96K E_mu_Systems_Vintage_Pro.midnam
+ 96K E_mu_Systems_Virtuoso_2000.midnam
+104K E_mu_Systems_XK_6.midnam
+ 76K E_mu_XL_1.midnam
+ 12K Ensoniq_ESQ.midnam
+ 28K Ensoniq_KS_32.midnam
+ 40K Ensoniq_MR_Rack_61_76.midnam
+ 16K Ensoniq_SD_1.midnam
+ 28K Ensoniq_SQ_1_2_R_32.midnam
+ 28K Ensoniq_SQ_1_2_R_.midnam
+ 28K Ensoniq_SQ_1.midnam
+ 28K Ensoniq_SQ_R.midnam
+ 28K Ensoniq_TS_10_12.midnam
+ 12K Ensoniq_VFX_SD.midnam
+320K Ensoniq_ZR.midnam
+ 36K Eventide_Eclipse.midnam
+4.0K EW_Hollywood_Brass_01_Generic_Brass.midnam
+4.0K EW_Hollywood_Brass_02_1FH_KS_Sus_Short_C0_A#0.midnam
+4.0K EW_Hollywood_Brass_03_1FH_KS_Effects_C0_A0.midnam
+4.0K EW_Hollywood_Brass_04_2FH_KS_Sus_Short_C0_G0.midnam
+4.0K EW_Hollywood_Brass_05_2FH_KS_Effects_C0_F#0.midnam
+4.0K EW_Hollywood_Brass_06_6FH_KS_Sus_Short_C0_G#0.midnam
+4.0K EW_Hollywood_Brass_07_6FH_KS_Effects_C0_A0.midnam
+4.0K EW_Hollywood_Brass_08_1TP_KS_Sus_Short_C0_A0.midnam
+4.0K EW_Hollywood_Brass_09_1TP_KS_Effects_C0_E0.midnam
+4.0K EW_Hollywood_Brass_10_2TP_KS_Sus_Short_C0_G#0.midnam
+4.0K EW_Hollywood_Brass_11_2TP_KS_Effects_C0_A0.midnam
+4.0K EW_Hollywood_Brass_12_3TP_KS_Sus_Short_C0_A#0.midnam
+4.0K EW_Hollywood_Brass_13_3TP_KS_Effects_C0_A0.midnam
+4.0K EW_Hollywood_Brass_14_1TB_KS_Sus_Short_C0_G#0.midnam
+4.0K EW_Hollywood_Brass_15_1TB_KS_Effects_C0_E0.midnam
+4.0K EW_Hollywood_Brass_16_3TB_KS_Sus_Short_C#4_G#4.midnam
+4.0K EW_Hollywood_Brass_17_3TB_KS_Effects_C#4_F4.midnam
+4.0K EW_Hollywood_Brass_18_1CM_KS_Sus_Short_C#3_G3.midnam
+4.0K EW_Hollywood_Brass_19_1TU_KS_Sus_Short_C3_G#3.midnam
+4.0K EW_Hollywood_Brass_20_1TU_KS_Effects_C3_E3.midnam
+4.0K EW_Hollywood_Brass_21_LB_KS_Sus_Short_C0_D0.midnam
+4.0K EW_Hollywood_Brass_22_LB_KS_Effects_C3_B3.midnam
+4.0K EW_Hollywood_Harp_01_Generic_Harp.midnam
+4.0K EW_Hollywood_Harp_02_Harp_KS_Master_C0_G#0.midnam
+4.0K EW_Hollywood_Orchestral_Percussion_01_Generic_Percussion.midnam
+4.0K EW_Hollywood_Orchestral_Percussion_02_Timpani_Flt_KS.midnam
+4.0K EW_Hollywood_Orchestral_Percussion_03_Timpani_Hrd_KS.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_01_Generic_Woodwinds.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_02_PF_KS_Sus_Short_C0_C1.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_03_PF_KS_Runs_FX_C0_G0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_04_FL_KS_Sus_Short_C0_C#1.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_05_FL_KS_Runs_FX_C0_G0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_06_FL2_KS_Sus_Short_C0_C#1.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_07_FL2_KS_Runs_FX_C0_G0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_08_AF_KS_Sus_Short_C0_F#0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_09_BF_KS_Sus_Short_C0_E0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_10_OB_KS_Sus_Short_C0_A#0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_11_OB_KS_Runs_FX_C0_G0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_12_EH_KS_Sus_Short_C0_A#0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_13_CL_KS_Sus_Short_C0_A#0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_14_CL_KS_Runs_FX_C0_G0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_15_BC_KS_Sus_Short_C0_A0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_16_BS_KS_Sus_Short_C0_G#0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_17_BS_KS_Runs_FX_C0_G0.midnam
+4.0K EW_Hollywood_Orchestral_Woodwinds_18_CB_KS_Sus_Short_C3_G#3.midnam
+4.0K EW_Hollywood_Strings_01_Generic_Strings.midnam
+4.0K EW_Hollywood_Strings_02_1st_Violins_Sus_KS_C0_F#0_Ni.midnam
+4.0K EW_Hollywood_Strings_03_1st_Violins_Sus_KS_C0_F#0_Ni_DIV_A.midnam
+4.0K EW_Hollywood_Strings_04_1st_Violins_Sus_KS_C0_F#0_Ni_DIV_B.midnam
+4.0K EW_Hollywood_Strings_05_2nd_Violins_Sus_KS_C0_G#0_Ni.midnam
+4.0K EW_Hollywood_Strings_06_2nd_Violins_Sus_KS_C0_G#0_Ni_DIV_A.midnam
+4.0K EW_Hollywood_Strings_07_2nd_Violins_Sus_KS_C0_G#0_Ni_DIV_B.midnam
+4.0K EW_Hollywood_Strings_08_Violas_Sus_KS_C0_G0_Ni.midnam
+4.0K EW_Hollywood_Strings_09_Violas_Sus_KS_C0_G0_Ni_DIV_A.midnam
+4.0K EW_Hollywood_Strings_10_Violas_Sus_KS_C0_G0_Ni_DIV_B.midnam
+4.0K EW_Hollywood_Strings_11_Celli_Sus_KS_C0_F#0_Ni.midnam
+4.0K EW_Hollywood_Strings_12_Celli_Sus_KS_C0_F#0_Ni_DIV_A.midnam
+4.0K EW_Hollywood_Strings_13_Celli_Sus_KS_C0_F#0_Ni_DIV_B.midnam
+4.0K EW_Hollywood_Strings_14_Basses_Sus_KS_C4_F4_Ni.midnam
+4.0K EW_Hollywood_Strings_15_Basses_Sus_KS_C4_F4_Ni_DIV_A.midnam
+4.0K EW_Hollywood_Strings_16_Basses_Sus_KS_C4_F4_Ni_DIV_B.midnam
+4.0K EW_Pianos_01_Bechstein_280_copy.midnam
+4.0K EW_Pianos_02_Bosendorfer_290.midnam
+4.0K EW_Pianos_03_Steinway_D.midnam
+4.0K EW_Pianos_04_Yamaha_C7.midnam
+ 20K Gotharmoon_deMoon.midnam
+8.0K Johnson_J_Station.midnam
+ 36K Jomox_MBase_11.midnam
+ 16K Kawai_GMega.midnam
+ 16K Kawai_K11.midnam
+8.0K Kawai_K1.midnam
+ 20K Korg_01R_W.midnam
+ 20K Korg_01_W(fd).midnam
+ 20K Korg_01_W_Pro(X).midnam
+ 24K Korg_03R_W.midnam
+ 24K Korg_05R_W.midnam
+ 16K Korg_AG_10.midnam
+ 16K Korg_AG_3.midnam
+4.0K Korg_C_15_25.midnam
+8.0K Korg_C_303_505.midnam
+ 12K Korg_CX3.midnam
+8.0K Korg_DW_8000.midnam
+ 20K Korg_ER_1.midnam
+8.0K Korg_EX_8000.midnam
+ 28K Korg_iSeries.midnam
+ 68K Korg_Karma.midnam
+120K Korg_Kross_2.midnam
+ 12K Korg_M1(R).midnam
+ 20K Korg_M3R.midnam
+ 12K Korg_MicroKORG.midnam
+ 12K Korg_MS2000R.midnam
+428K Korg_N1_N5.midnam
+ 88K Korg_N264.midnam
+ 88K Korg_N364.midnam
+252K Korg_NS5R.midnam
+ 72K Korg_NX5R.midnam
+ 16K Korg_Prophecy.midnam
+ 20K Korg_Radias.midnam
+ 24K Korg_T1.midnam
+ 64K Korg_Trinity.midnam
+ 68K Korg_Trinity_Plus.midnam
+ 68K Korg_Trinity_Pro(X).midnam
+ 52K Korg_Trinity_Track.midnam
+ 88K Korg_Triton_Expansion.midnam
+ 48K Korg_Triton_Le.midnam
+ 40K Korg_Triton.midnam
+104K Korg_Triton_Rack.midnam
+ 60K Korg_Triton_Studio.midnam
+ 80K Korg_TR_Rack.midnam
+ 52K Korg_TR_Workstation.midnam
+4.0K Korg_Volca_Bass.midnam
+4.0K Korg_Volca_Beats.midnam
+4.0K Korg_Volca_Keys.midnam
+ 24K Korg_Wavestation_A_D.midnam
+ 20K Korg_Wavestation_EX.midnam
+ 48K Korg_Wavestation_SR.midnam
+ 52K Korg_X2_3_3R.midnam
+ 52K Korg_X50.midnam
+ 24K Korg_X5(D).midnam
+ 24K Korg_X5DR.midnam
+ 24K Korg_Z1.midnam
+ 40K Kurzweil_1200_Pro_II.midnam
+ 40K Kurzweil_1200_Pro_I.midnam
+ 36K Kurzweil_K1200.midnam
+ 16K Kurzweil_K2000_Expansion.midnam
+116K Kurzweil_K2000.midnam
+156K Kurzweil_K2000R.midnam
+ 16K Kurzweil_K2500_2600_Expansion.midnam
+132K Kurzweil_K2500X.midnam
+ 72K Kurzweil_K2600.midnam
+ 64K Kurzweil_K2661.midnam
+116K Kurzweil_K2700.midnam
+ 28K Kurzweil_Mark_12_152.midnam
+8.0K Kurzweil_Micro_Piano.midnam
+280K Kurzweil_PC2_PC2r_w_Orch.midnam
+112K Kurzweil_PC3A.midnam
+ 12K Kurzweil_PC88.midnam
+ 28K Kurzweil_PC88_MX.midnam
+ 28K Kurzweil_PC88_VGM.midnam
+ 40K Kurzweil_PX_Plus.midnam
+ 16K Kurzweil_SP4.midnam
+8.0K Kurzweil_SP88x.midnam
+8.0K Lexicon_DR_Music_FX_Expansion.midnam
+ 20K Lexicon_Dual_FX_Expansion.midnam
+ 16K Lexicon_Dual_Vrb_Expansion.midnam
+ 28K Lexicon_MPX100.midnam
+ 20K Lexicon_MPX_1.midnam
+ 28K Lexicon_MPX_500.midnam
+ 28K Lexicon_MPX500.midnam
+ 20K Lexicon_MX200.midnam
+ 12K Lexicon_MX300.midnam
+ 24K Lexicon_PCM_80.midnam
+ 68K Lexicon_PCM_81.midnam
+ 32K Lexicon_PCM_90.midnam
+ 60K Lexicon_PCM_91.midnam
+8.0K Lexicon_Pitch_FX_Expansion.midnam
+8.0K Lexicon_SMG_Post_FX_Expansion.midnam
+8.0K Line_6_Bass_POD.midnam
+8.0K Line_6_Bass_PODxt.midnam
+ 12K Line_6_EchoPro.midnam
+ 12K Line_6_FilterPro.midnam
+ 12K Line_6_ModPro.midnam
+8.0K Line_6_POD_2_Pro.midnam
+ 12K Line_6_POD.midnam
+8.0K Line_6_PODxt.midnam
+ 12K Linn_AdrenaLinn_II.midnam
+ 16K MFB_503.midnam
+ 20K MFB_Tanzbar.midnam
+ 36K MIDI.midnam
+ 12K Moog_Grandmother.midnam
+8.0K Moog_MF_104M_Analog_Delay.midnam
+8.0K Moog_MF_108M_Cluster_Flux.midnam
+ 16K Moog_Minitaur.midnam
+ 24K Moog_Slim_Phatty.midnam
+ 16K Moog_Subsequent_37.midnam
+ 28K Morning_Star_MacWaveMaker.midnam
+ 36K Nord_Modular.midnam
+ 40K Novation_A_Station.midnam
+ 24K Novation_BassStationII.midnam
+8.0K Novation_Bass_Station_Rack.midnam
+ 16K Novation_Circuit.midnam
+8.0K Novation_DrumStation.midnam
+8.0K Novation_Drum_Station_Rack.midnam
+ 48K Novation_Nova.midnam
+ 16K Novation_Super_BassStation.midnam
+180K Novation_Supernova_II.midnam
+ 72K Oberheim_Matrix_1000.midnam
+ 48K Peavey_DPM_V3.midnam
+ 12K Rocktron_Replifex.midnam
+ 52K Roland_60s_70s_Expansion.midnam
+ 36K Roland_Asia_Expansion.midnam
+ 16K Roland_Bass&Drums_Expansion.midnam
+8.0K Roland_Big_Brass_Expansion.midnam
+ 44K Roland_Boss_DS_330.midnam
+ 28K Roland_Boss_GT_3.midnam
+ 40K Roland_Boss_GT_8.midnam
+ 12K Roland_Boss_SE_50.midnam
+ 12K Roland_Boss_SE_70_Guitar.midnam
+ 12K Roland_Boss_SE_70_Standard.midnam
+ 32K Roland_Complete_Orchestra_Exp.midnam
+4.0K Roland_Concert_Piano_Expansion.midnam
+4.0K Roland_Concert_Piano_Exp.midnam
+ 64K Roland_Country_Expansion.midnam
+ 16K Roland_D_10.midnam
+ 16K Roland_D_110.midnam
+ 12K Roland_D_50.midnam
+8.0K Roland_D_550.midnam
+ 12K Roland_D_5.midnam
+ 16K Roland_D_70.midnam
+ 52K Roland_Dance_Expansion.midnam
+ 12K Roland_Dynamic_Drums_Expansion.midnam
+ 12K Roland_Dynamic_Drums_Exp.midnam
+ 32K Roland_Experience_2_Expansion.midnam
+ 20K Roland_Experience_Expansion.midnam
+ 92K Roland_Fantom.midnam
+100K Roland_FantomX8.midnam
+140K Roland_Fantom_Xa.midnam
+188K Roland_FantomXR.midnam
+ 52K Roland_GR_1.midnam
+ 32K Roland_GR_1_w_Exp.midnam
+ 24K Roland_GR_30.midnam
+ 20K Roland_GR_33.midnam
+ 16K Roland_Handsonic.midnam
+ 56K Roland_Hip_Hop_Expansion.midnam
+ 56K Roland_House_Expansion.midnam
+ 32K Roland_JD_990.midnam
+ 32K Roland_JP_8000.midnam
+ 44K Roland_JP_8080.midnam
+ 12K Roland_Juno_106.midnam
+ 84K Roland_JV_1010.midnam
+152K Roland_JV_1080.midnam
+196K Roland_JV_2080.midnam
+ 80K Roland_JV_30.midnam
+ 56K Roland_JV_35_50.midnam
+ 32K Roland_JV_80_880.midnam
+ 64K Roland_JV_90.midnam
+320K Roland_JX_305.midnam
+ 12K Roland_JX_8P.midnam
+ 68K Roland_Latin_Expansion.midnam
+ 20K Roland_M_BD1.midnam
+188K Roland_MC_303.midnam
+180K Roland_MC_307.midnam
+120K Roland_MC_505.midnam
+ 24K Roland_M_DC1.midnam
+128K Roland_M_GS64.midnam
+ 20K Roland_M_OC1.midnam
+ 16K Roland_M_SE1.midnam
+ 16K Roland_MT_32.midnam
+ 20K Roland_M_VS1.midnam
+ 68K Roland_Orchestral_Expansion.midnam
+ 68K Roland_Orchestral_II_Expansion.midnam
+ 36K Roland_Piano_Expansion.midnam
+ 32K Roland_Platinum_Trax_Expansion.midnam
+ 28K Roland_Platinum_Trax_Exp.midnam
+ 96K Roland_PMA_5.midnam
+ 48K Roland_Pop_Expansion.midnam
+8.0K Roland_R_8M.midnam
+ 12K Roland_RD_250s.midnam
+ 12K Roland_RD_600.midnam
+100K Roland_RD_700.midnam
+144K Roland_RD_700sx.midnam
+108K Roland_RS_5_9.midnam
+ 72K Roland_RS_9.midnam
+ 56K Roland_SC_50.midnam
+ 80K Roland_SC_55.midnam
+ 88K Roland_SC_55mkII.midnam
+ 16K Roland_SC_7.midnam
+308K Roland_SC_88.midnam
+468K Roland_SC_88_Pro.midnam
+ 68K Roland_Session_Expansion.midnam
+ 24K Roland_SH_32.midnam
+ 92K Roland_Sirius.midnam
+104K Roland_SonicCell.midnam
+ 68K Roland_Special_FX_Expansion.midnam
+ 12K Roland_Studio_Expansion.midnam
+ 12K Roland_Studio_Exp.midnam
+ 52K Roland_Super_Sound_Expansion.midnam
+ 24K Roland_Supreme_Dance_Expansion.midnam
+ 24K Roland_Supreme_Dance_Exp.midnam
+ 12K Roland_Symphonic_Strings_Exp.midnam
+4.0K Roland_TB_03.midnam
+ 56K Roland_Techno_Expansion.midnam
+ 20K Roland_U_220.midnam
+ 36K Roland_Ultimate_Keys_Expansion.midnam
+ 28K Roland_Ultimate_Keys_Exp.midnam
+ 52K Roland_Vintage_Synth_Expansion.midnam
+ 28K Roland_Vocal_Expansion.midnam
+ 24K Roland_V_Synth_GT.midnam
+ 32K Roland_World_Collection_Exp.midnam
+ 52K Roland_World_Expansion.midnam
+184K Roland_XP_10.midnam
+100K Roland_XP_80.midnam
+ 88K Roland_XV_2020.midnam
+248K Roland_XV_3080.midnam
+188K Roland_XV_5050.midnam
+232K Roland_XV_5080.midnam
+244K Roland_XV_88.midnam
+ 12K Sequential_Circuits_Prophet_600.midnam
+ 16K Tascam_TM_D1000.midnam
+ 40K TC_Electronic_M3000.midnam
+112K Waldorf_Blofeld_2012.midnam
+108K Waldorf_Blofeld.midnam
+ 24K Waldorf_Micro_Q.midnam
+ 12K Waldorf_Pulse.midnam
+8.0K XLN_Audio_Addictive_Drums_2_Brushes.midnam
+8.0K XLN_Audio_Addictive_Drums_2.midnam
+8.0K XLN_Audio_Addictive_Drums_Brushes.midnam
+4.0K XLN_Audio_Addictive_Drums.midnam
+ 12K Yamaha_AN1X.midnam
+168K Yamaha_CS1X.midnam
+ 24K Yamaha_CS2X.midnam
+160K Yamaha_CS6R_x.midnam
+196K Yamaha_CVP_103_105.midnam
+204K Yamaha_CVP_107_109_700.midnam
+ 12K Yamaha_DX_7.midnam
+ 80K Yamaha_EX_5_7.midnam
+ 84K Yamaha_EX_5.midnam
+144K Yamaha_FS1R.midnam
+ 48K Yamaha_MM6.midnam
+ 68K Yamaha_MOTIF_6_7_8.midnam
+104K Yamaha_MOTIF_ES_6_7_8.midnam
+104K Yamaha_MOTIF_RACK_ES.midnam
+ 96K Yamaha_MOTIF_Rack.midnam
+100K Yamaha_MOTIF_XS.midnam
+248K Yamaha_MU100R.midnam
+ 52K Yamaha_MU10XG.midnam
+124K Yamaha_MU50.midnam
+132K Yamaha_MU80.midnam
+216K Yamaha_MU90R.midnam
+ 96K Yamaha_MX-49-61-88.midnam
+196K Yamaha_NP-V80.midnam
+ 12K Yamaha_P_121_125.midnam
+ 12K Yamaha_PLG100_XG_Expansion.midnam
+ 28K Yamaha_PLG150_AN_Expansion.midnam
+ 12K Yamaha_PLG150_DR_PC_Expansion.midnam
+ 20K Yamaha_PLG150DX_Expansion.midnam
+ 12K Yamaha_PLG150PF_Expansion.midnam
+ 20K Yamaha_PLG150VL_Expansion.midnam
+172K Yamaha_PSR_275.midnam
+200K Yamaha_PSR_530_630_730.midnam
+ 64K Yamaha_PSR540.midnam
+216K Yamaha_PSR_8000.midnam
+236K Yamaha_PSR_9000.midnam
+ 60K Yamaha_PSR_DJX_II.midnam
+ 56K Yamaha_PSR_DJX.midnam
+360K Yamaha_PSR_S900.midnam
+216K Yamaha_QS300.midnam
+120K Yamaha_QY70.midnam
+ 96K Yamaha_RM50.midnam
+ 80K Yamaha_S30_80.midnam
+ 56K Yamaha_S90.midnam
+ 32K Yamaha_So3.midnam
+ 40K Yamaha_So8.midnam
+ 20K Yamaha_SY77.midnam
+ 32K Yamaha_SY85.midnam
+ 20K Yamaha_SY99.midnam
+ 76K Yamaha_TG100.midnam
+ 44K Yamaha_TG500.midnam
+ 20K Yamaha_TG77.midnam
+ 12K Yamaha_TX81Z.midnam
+116K Yamaha_Tyros2.midnam
+260K Yamaha_Tyros.midnam
+
+# vim: sw=4 ts=4 wm=8 et ft=sh

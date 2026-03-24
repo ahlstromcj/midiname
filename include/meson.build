@@ -6,7 +6,7 @@
 # \library     midiname
 # \author      Chris Ahlstrom
 # \date        2026-02-21
-# \updates     2026-03-22
+# \updates     2026-03-24
 # \license     $XPC_SUITE_GPL_LICENSE$
 #
 #  This file is part of the "midiname" library. See the top-level meson.build
@@ -21,6 +21,9 @@ libmidiname_headers += files(
    'midi/nam/midnam_entities.hpp',
    'midi/nam/midnampack.hpp',
    'midi/nam/midipatchmanager.hpp',
+   'midi/pack/control.hpp',
+   'midi/pack/controlchange.hpp',
+   'midi/pack/midicommands.hpp',
    'midi/pack/patchbank.hpp'
    )
 
