@@ -1,0 +1,30 @@
+midi/pack Directory for the Midiname library
+Chris Ahlstrom
+2026-03-25 to 2026-03-25
+
+The header files in this directory are named after defined MIDNAM
+elements, but using all lowercase and no underscores [1].
+Some header files define more than one (related) class:
+
+    -   patchbank.hpp
+        -   programchange
+        -   patchmidicommands
+        -   patch
+        -   patchbank
+        -   patchbanks
+
+This file also notes elements (classes), laid out in the doc/dia diagrams,
+which are not implemented. Standalone elements are too small to warrant
+a separate module/class, and are often simply class members of a simple
+type.
+
+    -   Author
+    -   Manufacturer
+    -   Model
+    -   SupportsStandardDeviceMode
+
+[1] I once worked on an large assembly-language project where
+    the symbols were long names, almost sentences, all UPPER CASE
+    and no underscores. You get used to it.
+
+# vim: sw=4 ts=4 wm=8 et ft=sh

@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-23
- * \updates       2026-03-24
+ * \updates       2026-03-27
  * \version       $Revision$
  *
  *  This module defines the midi::pack::controlchange class. It is
@@ -36,6 +36,8 @@
  *  Usually, there is either one ControlChange in a MIDICommands,
  *  or two ControlChanges plus a ProgramChange in a PatchMIDICommands.
  */
+
+#include <vector>                       /* std::vector<>                    */
 
 namespace midi
 {
@@ -117,9 +119,19 @@ public:
         return m_ctrl_number;
     }
 
-    int ctrlk_value () const
+    void ctrl_number (int cn)
+    {
+        m_ctrl_number = cn;
+    }
+
+    int ctrl_value () const
     {
         return m_ctrl_value;
+    }
+
+    void ctrl_value (int cv)
+    {
+        m_ctrl_value = cv;
     }
 
 };          // class controlchange

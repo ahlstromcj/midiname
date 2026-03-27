@@ -173,6 +173,8 @@ patchbank::patchbank
     // no code
 }
 
+#if defined USE_PATCHBANK_PATCH_NAMELIST
+
 int
 patchbank::set_patch_name_list (const patch::namelist & lst)
 {
@@ -183,6 +185,8 @@ patchbank::set_patch_name_list (const patch::namelist & lst)
 
     return 0;
 }
+
+#endif
 
 /**
  *  class patchbanks

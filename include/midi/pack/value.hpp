@@ -28,16 +28,18 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-16
- * \updates       2026-03-16
+ * \updates       2026-03-27
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to valuees.
  *  No XML code is involved; no pointers are involved.
+ *
+ *      -   values
+ *      -   value
+ *      -   values::list (ValueNameList)
+ *      -   usesvaluenamelist (string)
  */
 
-#include <cstdint>                      /* std::uint16_t, uint8_t           */
-#include <list>                         /* std::list<>                      */
-#include <map>                          /* std::map<>                       */
 #include <string>                       /* std::string<>                    */
 
 namespace midi
@@ -55,46 +57,112 @@ class value
 
 public:
 
-    using namelist = std::list<value>;
-    using bank_number = std::uint16_t;
-    using number = std::uint8_t;
+    using list = std::list<value>;
 
 private:
 
     /**
-     *  The "Name" value of the "<Patch>" item.
+     *  The "Name" value of the "<Value>" item.
      */
 
     std::string m_name { };
 
     /**
-     *  Need to investigate this one.
+     *  The "Number" value of the Value.
      */
+
+    int m_value_number;
 
 public:
 
     value () = default;
-    value
-    (
-        const std::string & pname,
-    );
+
+    value (const std::string & pname, int pnumber) :
+        m_name      (pname),
+        m_number    (pnumber)
+    {
+        // no code
+    }
+
     value (const value & id) = default;
     value & operator = (const value & id) = default;
     value (value && id) = default;
     value & operator = (value && id) = default;
-    virtual ~value () = default;
+    ~value () = default;
 
     const std::string & name () const
     {
         return m_name;
     }
 
-    void set_name (const std::string & name)
+    void name (const std::string & name)
     {
         m_name = name;
     }
 
+    int value_number () const
+    {
+        return m_value_number;
+    }
+
+    void value_number (int v)
+    {
+        m_value_number = v;
+    }
+
 };          // class value
+
+/**
+ *  Values.
+ */
+
+class values
+{
+
+private:
+
+    /**
+     *  Min.
+     */
+
+    int m_minimum { 0 };
+
+    /**
+     *  Max.
+     */
+
+    int m_maximum { 127 };
+
+    /**
+     *  Default.
+     */
+
+    int m_default { 0 };
+
+    /**
+     *  Units.
+     */
+
+    std::string m_units { };
+
+    /**
+     *  Mapping.
+     */
+
+    std::string m_mapping { };
+
+public:
+
+    values () = default;
+    values (const values & id) = default;
+    values & operator = (const values & id) = default;
+    values (values && id) = default;
+    values & operator = (values && id) = default;
+    ~values () = default;
+
+    // TODO getters and setters
+
+};          // class values
 
 }           // namespace pack
 

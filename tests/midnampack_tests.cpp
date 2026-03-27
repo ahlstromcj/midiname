@@ -24,7 +24,7 @@
  * \library       midiname
  * \author        Chris Ahlstrom
  * \date          2026-03-23
- * \updates       2026-03-23
+ * \updates       2026-03-25
  * \license       See above.
  *
  */
@@ -36,6 +36,8 @@
 #include "cli/parser.hpp"               /* cli::parser, etc.                */
 #include "midiname.hpp"                 /* midiname_version() function      */
 #include "midi/nam/midnampack.hpp"      /* midi::nam::midnampack class      */
+
+#include "midi/pack/midinamedocument.hpp"   /* */
 
 namespace   // anonymous
 {

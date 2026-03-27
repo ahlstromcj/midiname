@@ -1,6 +1,6 @@
 Tests/Data Directory for the Midiname library
 Chris Ahlstrom
-2026-02-20 to 2026-03-24
+2026-02-20 to 2026-03-27
 
 This file describes the data associated with the test application.
 The *.midnam files illustrate different flavors of XML hierarchies.
@@ -29,6 +29,15 @@ The *.midnam files illustrate different flavors of XML hierarchies.
                 PatchNameList (2 of them)
                     Patch(es)
 
+        Moog_MF_104M_Analog_Delay:
+
+            ControlNameList
+                Control
+                    Values
+                        ValueNameList
+                            Value
+
+
         Roland_MT_32.midnam:
 
             MasterDeviceNames
@@ -46,6 +55,19 @@ The *.midnam files illustrate different flavors of XML hierarchies.
                         PatchBank(s)
                             PatchNameList(s)
                                 Patch
+
+        XLN_Audio_Addictive_Drums.midnam:
+
+            MasterDeviceNames
+                NoteNameList
+                    Note
+
+        Yamaha_EX_5_7.midnam:
+
+            MasterDeviceNames
+                NoteNameList
+                    NoteGroup
+                        Note
 
         Yamaha_PSR_S900.midnam:
 

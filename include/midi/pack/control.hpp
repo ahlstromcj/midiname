@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-16
- * \updates       2026-03-16
+ * \updates       2026-03-26
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to controles.
@@ -36,9 +36,8 @@
  */
 
 #include <cstdint>                      /* std::uint16_t, uint8_t           */
-#include <list>                         /* std::list<>                      */
-#include <map>                          /* std::map<>                       */
 #include <string>                       /* std::string<>                    */
+#include <vector>                       /* std::vector<>                    */
 
 namespace midi
 {
@@ -55,16 +54,29 @@ class control
 
 public:
 
-    using namelist = std::list<control>;
-    using ctrlnumber = std::uint8_t;
+    /**
+     *  A handy alias for one-byte MIDI values. We might need more types
+     *  as per the enum class type below.
+     */
 
-    enum class ctrltype
+    using number = std::uint8_t;
+
+    /**
+     *  Provides a type that can be used by control-containing elements.
+     */
+
+    using list = std::vector<control>;
+
+    /**
+     *  The type of the control.
+     */
+
+    enum class type
     {
-        sevenbit,
-        fourteenbit,
-        rpn,
-        nrpn,
-        max
+        sevenbit,                       /* "7bit": the default value        */
+        fourteenbit,                    /* "14bit"                          */
+        rpn,                            /* "RPN"                            */
+        nrpn                            /* "NRPN"                           */
     };
 
 private:
@@ -73,14 +85,14 @@ private:
      *  Provides broad characteristics of the control.
      */
 
-    ctrltype m_ctrl_type { sevenbit };
+    type m_ctrl_type { type::sevenbit };
 
     /**
      *  Provides the number of the control, the number that is sent and
      *  received.
      */
 
-    ctrlnumber m_ctrl_number { 0 };      // for now
+    number m_ctrl_number { 0 };         /* for now */
 
     /**
      *  The "Name" value of the "<Patch>" item.
@@ -91,32 +103,29 @@ private:
 public:
 
     control () = default;
-    control
-    (
-        const std::string & pname,
-    );
+    control (const std::string & pname);
     control (const control & id) = default;
     control & operator = (const control & id) = default;
     control (control && id) = default;
     control & operator = (control && id) = default;
     virtual ~control () = default;
 
-    const ctrltype ctrl_type () const
+    const type ctrl_type () const
     {
         return m_ctrl_type;
     }
 
-    void ctrl_type (ctrltype ct)
+    void ctrl_type (type ct)
     {
         m_ctrl_type = ct;
     }
 
-    const ctrlnumber ctrl_number () const
+    const ctrl_number ctrl_number () const
     {
         return m_ctrl_number;
     }
 
-    void ctrl_number (ctrlnumber cn)
+    void ctrl_number (number cn)
     {
         m_ctrl_number = cn;
     }
@@ -137,8 +146,8 @@ public:
  *  Free functions.
  *--------------------------------------------------------------------------*/
 
-extern std::string control_type_name (control::ctrltype t);
-extern control::ctrltype (const std::string & s);
+extern std::string control_type_name (control::type t);
+extern control::type (const std::string & s);
 
 }           // namespace pack
 

@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-15
- * \updates       2026-03-24
+ * \updates       2026-03-27
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to patches.
@@ -51,6 +51,16 @@
  *  contained indirectly by the patchbank class, as shown in the
  *  midnam-structure.dia diagram. The exception is MIDICommands,
  *  which gets its own midi::pack module.
+ *
+ *      -   programchange
+ *      -   patchmidicommands
+ *      -   patch
+ *          -   patch::key
+ *          -   patch::list
+ *          -   patch::usesnotenamelist (a string)
+ *      -   patchbank
+ *          -   patchbank::usepatchnamelist (a string)
+ *      -   patchbanks
  */
 
 #include <cstdint>                      /* std::uint16_t, uint8_t           */
@@ -60,7 +70,7 @@
 #include <vector>                       /* std::vector<>                    */
 
 #include "cpp_types.hpp"                /* lib66::tokenization vector       */
-#include "midi/pack/controlchange.hpp"   /* midi::pack::controlchange       */
+#include "midi/pack/controlchange.hpp"  /* midi::pack::controlchange        */
 #include "midi/pack/midicommands.hpp"   /* midi::pack::midicommands         */
 
 namespace midi
@@ -121,9 +131,19 @@ public:
         return m_prog_number;
     }
 
+    void prog_number (int pn)
+    {
+        m_prog_number = pn;
+    }
+
     bool is_active () const
     {
         return m_is_active;
+    }
+
+    void is_active (bool f)
+    {
+        m_is_active = f;
     }
 
 };          // class programchange
@@ -143,13 +163,13 @@ private:
      *  Using a vector for flexibility.
      */
 
-    controlchange::list m_control_changes;
+    controlchange::list m_control_changes { };
 
     /**
      *  Item: "ProgramChange", one item, so far as we have seen.
      */
 
-    programchange m_program_change;
+    programchange m_program_change { };
 
 public:
 
@@ -192,13 +212,6 @@ public:
 
 };          // class patchmidicommands
 
-// using PatchConstPtr     = std::shared_ptr<const Patch>;
-// using PatchList = std::list<key>;
-// using PatchMap          = std::map<key, PatchPtr>;
-// using PatchNameList     = std::list<PatchPtr>;
-// using PatchNameLists    = std::map<std::string, PatchNameList>;
-// using PatchPtr          = std::shared_ptr<Patch>;
-
 /**
  *  Patch
  */
@@ -207,10 +220,6 @@ class patch
 {
 
 public:
-
-    // typedef std::list<std::shared_ptr<Patch> > PatchNameList;
-    // using pointer = std::shared_ptr<Patch>;
-    // using list = std::list<pointer>;
 
     /**
      *  PatchNameList (see the midi_entities module) provides a list of
@@ -286,10 +295,11 @@ private:
     std::string m_name { };
 
     /**
-     *  Need to investigate this one.
+     *  Some patches refer to a UsesNoteNameList. This is the name of
+     *  that list, if it is not empty.
      */
 
-    std::string m_note_list_name { };
+    std::string m_note_name_list { };
 
     /**
      *  Contains the bank and program numbers used to sort the patches.
@@ -309,8 +319,8 @@ public:
     patch
     (
         const std::string & pname,
-        prognumber programno            = 0,
-        banknumber bankno          = 0
+        prognumber programno    = 0,
+        banknumber bankno       = 0
     );
     patch (const patch & id) = default;
     patch & operator = (const patch & id) = default;
@@ -328,9 +338,14 @@ public:
         m_name = name;
     }
 
-    const std::string & note_list_name() const
+    const std::string & note_name_list () const
     {
-        return m_note_list_name;
+        return m_note_name_list;
+    }
+
+    void note_name_list (const std::string & nnl)
+    {
+        m_note_name_list = nnl;
     }
 
     prognumber program () const
@@ -357,9 +372,6 @@ public:
     {
         return m_id;
     }
-
-//  xml66::XMLNode & get_state () const;
-//  int set_state (const xml66::XMLTree &, const xml66::XMLNode &);
 
 };          // class patch
 
@@ -393,12 +405,20 @@ private:
 
     patch::banknumber m_number { UINT16_MAX };  /* some don't have a Number */
 
+#if defined USE_PATCHBANK_PATCH_NAMELIST
+
     /**
      *  Some PatchBanks have only a MIDICommands element, while others have
      *  a PatchNameList, and others have a UsesPatchNameList.
+     *
+     *  We don't think we need to store this structure, as many other
+     *  patchbanks might use it. Could make it a reference, but for now
+     *  just use the name to do a lookup.
      */
 
     patch::namelist m_patch_name_list { };      /* PatchNameList            */
+
+#endif
 
     /**
      *  If non-empty, this patchbank uses a patch::namelist.
@@ -449,10 +469,16 @@ public:
         return m_number != UINT16_MAX;
     }
 
-    const patch::namelist & patch_name_list () const
+#if defined USE_PATCHBANK_PATCH_NAMELIST
+
+    const patch::namelist & patch_list_name () const
     {
-        return m_patch_name_list;
+        return m_patch_list_name;
     }
+
+    int set_patch_name_list (const patch::namelist &);
+
+#endif
 
     /**
      *  The alternative is having a midicommand object.
@@ -460,15 +486,13 @@ public:
 
     bool has_patch_name_list () const
     {
-        return ! m_patch_name_list.empty();
+        return ! m_patch_list_name.empty();
     }
 
-    const std::string & patch_list_name () const
+    const std::string & patch_name_list () const
     {
         return m_patch_list_name;
     }
-
-    int set_patch_name_list (const patch::namelist &);
 
     midicommands & commands ()
     {
@@ -485,13 +509,7 @@ public:
         return m_has_rom;
     }
 
-//  xml66::XMLNode & get_state () const;
-//  int set_state (const xml66::XMLTree &, const xml66::XMLNode &);
-
 };          // class patchbank
-
-// using patchbankptr  = std::shared_ptr<patchbank>;
-// using patchbanks    = std::list<patchbankptr>;
 
 /**
  *  The patchbanks class contains PatchBank elements.

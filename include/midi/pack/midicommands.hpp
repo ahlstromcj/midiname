@@ -28,14 +28,12 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-23
- * \updates       2026-03-24
+ * \updates       2026-03-27
  * \version       $Revision$
  *
  *  This module defines the midi::pack::midicommands class. It's name is a
  *  bit misleading; it is used in a limited context.
  */
-
-#include <vector>                       /* std::vector<>                    */
 
 #include "midi/pack/controlchange.hpp"  /* class midi::pack::controlchange  */
 
@@ -46,7 +44,7 @@ namespace pack
 {
 
 /**
- *  midicommands.
+ *  MidiCommands.
  *
  *  In a *.midnam file, there is one or two ControlChange elements:
  *
@@ -65,10 +63,10 @@ private:
 
     /**
      *  Matches the 'ControlChange' attribute. Generally there are one
-     *  or two fo these objects.
+     *  or two of these objects.
      */
 
-    std::vector<controlchange> m_control_changes { };
+    controlchange::list m_control_changes { };
 
 public:
 
@@ -96,7 +94,20 @@ public:
     midicommands & operator = (midicommands && id) = default;
     ~midicommands () = default;
 
-    // more to do
+    controlchange::list & control_changes ()
+    {
+        return m_control_changes;
+    }
+
+    const controlchange::list & control_changes () const
+    {
+        return m_control_changes;
+    }
+
+    void control_changes (const controlchange::list & cc)
+    {
+        m_control_changes = cc;
+    }
 
 };          // class midicommands
 
