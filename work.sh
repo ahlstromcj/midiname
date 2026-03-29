@@ -8,7 +8,7 @@
 # \library        midiname
 # \author         Chris Ahlstrom
 # \date           2026-02-20
-# \update         2026-02-25
+# \update         2026-03-29
 # \version        $Revision$
 # \license        $XPC_SUITE_GPL_LICENSE$
 #
@@ -262,7 +262,7 @@ if test $DOCLEAN = "yes" ; then
    rm -f $MAKEFILE
    rm -f build/compile_commands.json
    rm -rf wipe/
-   rm -f doc/dox/*.log
+   rm -f doc/dia/*~
    rm -f doc/latex/*.log
    rm -rf build/subprojects/
    echo "Build products removed from the midiname/build directory."

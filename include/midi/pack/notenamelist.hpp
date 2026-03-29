@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-26
- * \updates       2026-03-27
+ * \updates       2026-03-28
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to notenamelistes.
@@ -46,6 +46,12 @@
  *
  *  Multiple NoteNameLists can appear in a patch-file. They seem to be
  *  mostly used for drum-notes and related groups of drum-notes.
+ *
+ *          MIDNAM Element          midi::pack class
+ *
+ *      -   Note                    note
+ *      -   NoteGroup               notegroup
+ *      -   NoteNameList            notenamelist
  */
 
 #include <cstdint>                      /* std::uint16_t, uint8_t           */

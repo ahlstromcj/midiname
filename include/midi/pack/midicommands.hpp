@@ -28,11 +28,16 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-23
- * \updates       2026-03-27
+ * \updates       2026-03-28
  * \version       $Revision$
  *
  *  This module defines the midi::pack::midicommands class. It's name is a
  *  bit misleading; it is used in a limited context.
+ *
+ *          MIDNAM Element          midi::pack class
+ *
+ *      -   MIDICommands            midicommands
+ *      -   SysEx                   sysex
  */
 
 #include "midi/pack/controlchange.hpp"  /* class midi::pack::controlchange  */
@@ -110,6 +115,42 @@ public:
     }
 
 };          // class midicommands
+
+class sysex
+{
+
+private:
+
+    /**
+     *  Not quite sure of the meaning of this item yet.
+     */
+
+    int m_sysex_device_id_offset;
+
+public:
+
+    sysex (int offset = 0) : m_sysex_device_id_offset (offset)
+    {
+        // no code
+    }
+
+    sysex (const sysex & id) = default;
+    sysex & operator = (const sysex & id) = default;
+    sysex (sysex && id) = default;
+    sysex & operator = (sysex && id) = default;
+    ~sysex () = default;
+
+    int sysex_device_id_offset () const
+    {
+        return m_sysex_device_id_offset;
+    }
+
+    void sysex_device_id_offset (int offset)
+    {
+        m_sysex_device_id_offset = offset;
+    }
+
+};          // class sysex
 
 }           // namespace pack
 

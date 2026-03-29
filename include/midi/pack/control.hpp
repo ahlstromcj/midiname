@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-16
- * \updates       2026-03-26
+ * \updates       2026-03-28
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to controles.
@@ -63,6 +63,7 @@ public:
 
     /**
      *  Provides a type that can be used by control-containing elements.
+     *  Implements ControlNameList.
      */
 
     using list = std::vector<control>;
@@ -103,14 +104,19 @@ private:
 public:
 
     control () = default;
-    control (const std::string & pname);
+    control
+    (
+        const std::string & cname,
+        type ctrltype,
+        int ctrlnumber
+    );
     control (const control & id) = default;
     control & operator = (const control & id) = default;
     control (control && id) = default;
     control & operator = (control && id) = default;
     virtual ~control () = default;
 
-    const type ctrl_type () const
+    type ctrl_type () const
     {
         return m_ctrl_type;
     }
@@ -120,7 +126,7 @@ public:
         m_ctrl_type = ct;
     }
 
-    const ctrl_number ctrl_number () const
+    number ctrl_number () const
     {
         return m_ctrl_number;
     }
@@ -147,7 +153,7 @@ public:
  *--------------------------------------------------------------------------*/
 
 extern std::string control_type_name (control::type t);
-extern control::type (const std::string & s);
+extern control::type string_to_control_type (const std::string & s);
 
 }           // namespace pack
 

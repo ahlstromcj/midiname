@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-25
- * \updates       2026-03-27
+ * \updates       2026-03-29
  * \version       $Revision$
  *
  *  This module defines the midi::pack::channelnameset class and some related
@@ -88,6 +88,26 @@ public:
     availablechannel (availablechannel && id) = default;
     availablechannel & operator = (availablechannel && id) = default;
     ~availablechannel () = default;
+
+    int channel () const
+    {
+        return m_channel;
+    }
+
+    void channel (int c)
+    {
+        m_channel = c;
+    }
+
+    bool available () const
+    {
+        return m_available;
+    }
+
+    void available (bool f)
+    {
+        m_available = f;
+    }
 
 };          // class availablechannel
 

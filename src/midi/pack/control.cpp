@@ -1,6 +1,3 @@
-#if ! defined MIDINAME_MIDI_PACK_EXTENDINGDEVICENAMES_HPP
-#define MIDINAME_MIDI_PACK_EXTENDINGDEVICENAMES_HPP
-
 /*
  *  This file is part of midiname.
  *
@@ -20,23 +17,22 @@
  */
 
 /**
- * \file          extendingdevicenames.hpp
+ * \file          control.cpp
  *
  *  Provides data structures mirroring some of the classes in the
  *  midnam_entities module.
  *
  * \library       midiname library
  * \author        Chris Ahlstrom
- * \date          2026-03-25
+ * \date          2026-03-28
  * \updates       2026-03-28
  * \version       $Revision$
  *
- *  This module contains the midi::pack classes related to
- *  extendingdevicenameses.  No XML code is involved; no pointers are
- *  involved.
+ *  This module contains the midi::pack classes related to controles.
+ *  No XML code is involved; no pointers are involved.
  */
 
-#include <string>                       /* std::string<>                    */
+#include "midi/pack/control.hpp"        /* midi::pack::control class        */
 
 namespace midi
 {
@@ -45,57 +41,60 @@ namespace pack
 {
 
 /**
- *  ExtendingDeviceNames.
+ *  control class.
  */
 
-class extendingdevicenames
+control::control
+(
+    const std::string & cname,
+    type ctrltype,
+    int ctrlnumber
+) :
+    m_ctrl_type     (ctrltype),
+    m_ctrl_number   (number(ctrlnumber)),
+    m_name          (cname)
 {
-
-private:
-
-    /**
-     *  The "Name" of the this object.
-     */
-
-    std::string m_name { };
-
-public:
-
-    extendingdevicenames () = default;
-    extendingdevicenames (const std::string & pname);
-    extendingdevicenames (const extendingdevicenames & id) = default;
-    extendingdevicenames & operator =
-    (
-        const extendingdevicenames & id
-    ) = default;
-    extendingdevicenames (extendingdevicenames && id) = default;
-    extendingdevicenames & operator = (extendingdevicenames && id) = default;
-    ~extendingdevicenames () = default;
-
-    const std::string & name ()
-    {
-        return m_name;
-    }
-
-    void name (const std::string & n)
-    {
-        m_name = n;
-    }
-
-};          // class extendingdevicenames
+    // no code
+}
 
 /*--------------------------------------------------------------------------
  *  Free functions.
  *--------------------------------------------------------------------------*/
 
+std::string
+control_type_name (control::type t)
+{
+    std::string result { "unknown" };
+    switch (t)
+    {
+    case control::type::sevenbit:      result = "7bit";    break;
+    case control::type::fourteenbit:   result = "14bit";   break;
+    case control::type::rpn:           result = "RPN";     break;
+    case control::type::nrpn:          result = "NRPN";    break;
+    }
+    return result;
+}
+
+control::type
+string_to_control_type (const std::string & s)
+{
+    control::type result { control::type::sevenbit };
+    if (s == "14bit")
+        result = control::type::fourteenbit;
+    else if (s == "RPN")
+        result = control::type::rpn;
+    else if (s == "NRPN")
+        result = control::type::nrpn;
+
+    return result;
+}
+
 }           // namespace pack
 
 }           // namespace midi
 
-#endif      // MIDINAME_MIDI_PACK_EXTENDINGDEVICENAMES_HPP
-
 /*
- * extendingdevicenames.hpp
+ * control.cpp
  *
  * vim: sw=4 ts=4 wm=4 et ft=cpp
  */

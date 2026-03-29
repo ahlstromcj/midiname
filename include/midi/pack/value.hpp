@@ -28,16 +28,18 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-16
- * \updates       2026-03-27
+ * \updates       2026-03-29
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to valuees.
  *  No XML code is involved; no pointers are involved.
  *
- *      -   values
- *      -   value
- *      -   values::list (ValueNameList)
- *      -   usesvaluenamelist (string)
+ *          MIDNAM Element          midi::pack class
+ *
+ *      -   Value                   value
+ *      -   Values                  values
+ *      -   ValueNameList           values::list
+ *      -   UsesValueNameList       usesvaluenamelist (string)
  */
 
 #include <string>                       /* std::string<>                    */
@@ -154,6 +156,22 @@ private:
 public:
 
     values () = default;
+
+    values
+    (
+        int mini, int maxi, int defalt,
+        const std::string & units,
+        const std::string & mapping
+    ) :
+        m_minimum   { mini },
+        m_maximum   { maxi },
+        m_default   { defalt },
+        m_units     { units},
+        m_mapping   { mapping}
+    {
+        // no code
+    }
+
     values (const values & id) = default;
     values & operator = (const values & id) = default;
     values (values && id) = default;

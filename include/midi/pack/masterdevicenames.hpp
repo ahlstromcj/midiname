@@ -28,7 +28,7 @@
  * \library       midiname library
  * \author        Chris Ahlstrom
  * \date          2026-03-25
- * \updates       2026-03-27
+ * \updates       2026-03-28
  * \version       $Revision$
  *
  *  This module contains the midi::pack classes related to
@@ -36,9 +36,10 @@
  *
  *  No XML code is involved; no pointers are involved.
  *
- *          MIDNAM Element          midi::pack class
+ *          MIDNAM Element              midi::pack class
  *
- *      -   MasterDeviceNames       masterdevicenames
+ *      -   MasterDeviceNames           masterdevicenames
+ *      -   SupportsStandardDeviceMode  standarddevicemode (string)
  */
 
 #include <string>                       /* std::string<>                    */
@@ -69,24 +70,38 @@ private:
      *  Models (model names).
      */
 
-    models m_model_information;
+    models m_model_information { };
 
     /**
      *  This class holds classes related to patches and patchbanks.
      *  There can be 0, 1, or many name-sets.
      */
 
-    channelnameset::list m_channel_name_sets;
+    channelnameset::list m_channel_name_sets { };
 
     /**
      *  This class manages NoteGroups and Notes.
      */
 
-    notenamelist::list m_note_name_list;
+    notenamelist::list m_note_name_list { };
+
+    /**
+     *  SupportsStandardDeviceMode. This string is a name. It appears
+     *  only in Korg_N1_N5, and is "General MIDI".
+     */
+
+    std::string m_standard_device_mode { };
 
 public:
 
     masterdevicenames () = default;
+
+    masterdevicenames (const std::string & mode) :
+        m_standard_device_mode (mode)
+    {
+        // no code
+    }
+
     masterdevicenames (const masterdevicenames & id) = default;
     masterdevicenames & operator = (const masterdevicenames & id) = default;
     masterdevicenames (masterdevicenames && id) = default;
@@ -131,6 +146,16 @@ public:
     const notenamelist::list & note_name_list () const
     {
         return m_note_name_list;
+    }
+
+    const std::string & standard_device_mode () const
+    {
+        return m_standard_device_mode;
+    }
+
+    void standard_device_mode (const std::string & mode)
+    {
+        m_standard_device_mode = mode;
     }
 
 };          // class masterdevicenames
