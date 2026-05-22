@@ -1,6 +1,6 @@
 Tests/Data Directory for the Midiname library
 Chris Ahlstrom
-2026-02-20 to 2026-03-27
+2026-02-20 to 2026-04-20
 
 This file describes the data associated with the test application.
 The *.midnam files illustrate different flavors of XML hierarchies.
@@ -28,6 +28,11 @@ The *.midnam files illustrate different flavors of XML hierarchies.
             ExtendingDeviceNames
                 PatchNameList (2 of them)
                     Patch(es)
+
+        Novation_BassStationII.midnam (the only file with N/RPN):
+
+            <Control Type="NRPN" Number="72" Name="osc 1 waveform">
+            <Control Type="NRPN" Number="70" Name="MW LFO1 Osc Pitch"/>
 
         Moog_MF_104M_Analog_Delay:
 
