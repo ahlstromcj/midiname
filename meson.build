@@ -6,7 +6,7 @@
 # \library     midiname
 # \author      Chris Ahlstrom
 # \date        2026-02-21
-# \updates     2026-03-15
+# \updates     2026-05-22
 # \license     $XPC_SUITE_GPL_LICENSE$
 #
 #  This file is part of the "midiname" library. It was part of the libs66
@@ -33,7 +33,7 @@ project('midiname',
    [ 'c', 'cpp' ],
    version : '0.1',
    license : 'GPLv3',
-   meson_version : '>=1.1.0',
+   meson_version : '>=1.4.0',
    default_options : [
       'c_std=c11', 'cpp_std=c++17', 'warning_level=3',
       'default_library=both'
@@ -64,7 +64,7 @@ endif
 midiname_pkg_description = 'Refactors base XML configuration/utility modules.'
 midiname_pkg_version = meson.project_version()
 midiname_api_version = '0.1'
-midiname_info_date = '2026-03-15'
+midiname_info_date = '2026-05-22'
 midiname_info_build_type = get_option('buildtype')
 midiname_info_build_root = meson.project_build_root()
 midiname_info_lib_type = get_option('default_library')
