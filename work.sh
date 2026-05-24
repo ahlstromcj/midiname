@@ -8,7 +8,7 @@
 # \library        midiname
 # \author         Chris Ahlstrom
 # \date           2025-01-30
-# \update         2026-05-22
+# \update         2026-05-24
 # \version        $Revision$
 # \license        $XPC_SUITE_GPL_LICENSE$
 #
@@ -33,7 +33,7 @@ LANG=C
 export LANG
 CYGWIN=binmode
 export CYGWIN
-export MIDINAME_SCRIPT_EDIT_DATE="2026-05-22"
+export MIDINAME_SCRIPT_EDIT_DATE="2026-05-24"
 export MIDINAME_LIBRARY_API_VERSION="0.1"
 export MIDINAME_LIBRARY_VERSION="$MIDINAME_LIBRARY_API_VERSION.0"
 export MIDINAME="midiname"
@@ -44,7 +44,7 @@ export MIDINAME_LIBRARY="$MIDINAME-$MIDINAME_LIBRARY_API_VERSION"
 BASE_BUILD_DIR="build"              # 'cfg66/build'
 BUILD_DIR="$BASE_BUILD_DIR/cc"      # "native" compiler (CC/CXX) build
 BUILD_TYPE="release"
-CROSS_PKG_PATH="/usr/lib/pkgconfig" # TO DO TO DO
+CROSS_PKG_PATH="/usr/lib/pkgconfig"
 EXTRAFLAGS=""
 INSTALL_LIBDIR="lib"                # "lib/x86_64-linux-gnu" on Debian
 INSTALL_PREFIX="/usr/local"         # "/usr", what about Windows?
